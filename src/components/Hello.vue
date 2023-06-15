@@ -49,6 +49,7 @@ export default {
 @import '~vux/vux.css';
 .container {
   width: 100%;
+  background: #ccc;
 }
 .hello {
   text-align: center;
