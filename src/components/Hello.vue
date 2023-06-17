@@ -5,6 +5,7 @@
       <button @click="handle">Show List</button>
       <label for="name">name</label>
       <input type="text" v-model="msg">
+      <!-- <address></address> -->
     </div>
     <group v-if="isShow">
       <cell v-for="item in values" :key="item" v-bind:title="item" value="切换语言"></cell>
@@ -20,11 +21,14 @@
 // by this way, you can reduce webpack bundle size
 import Group from 'vux/components/group/'
 import Cell from 'vux/components/cell/'
-
+import vButton from 'vux/components/button/'
+import { Alert } from 'vux'
 export default {
   components: {
     Group,
-    Cell
+    Cell,
+    vButton,
+    Alert
   },
   data () {
     return {
@@ -49,6 +53,7 @@ export default {
 @import '~vux/vux.css';
 .container {
   width: 100%;
+  background: #ccc;
 }
 .hello {
   text-align: center;
