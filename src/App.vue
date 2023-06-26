@@ -3,13 +3,13 @@
     <!-- <div class="logo"><img src="./assets/logo.png"></div> -->
     <p v-show="authenticating" style="color:red">Authenticating...</p>
     <h1 class="header">Header</h1>
-    <router-view class="view" transition="test" transition-mode="out-in" keep-alive></router-view>
     <div class="footer">
       <a v-link="{ path: '/user/1234/profile/what' }">user</a>
+      <a v-link="{ path: '/about' }">about</a>
       <a v-link="{ path: '/welcome' }">主页</a>
       <a v-link="{ path: '/forbidden' }">forbidden</a>
-      <a v-link="{ path: '/about' }">about</a>
     </div>
+    <router-view class="view" transition="test" transition-mode="out-in" keep-alive></router-view>
   </div>
 </template>
 
@@ -52,8 +52,9 @@ body {
   background: white;
 }
 .v-link-active {
-  color: orange;
-  background: white;
+  color: white;
+  background: orange;
+  box-sizing: border-box;
   padding: 10px;
 }
 [v-cloak] {
@@ -75,12 +76,12 @@ body {
   text-align: center;
   margin: 0 auto;
   padding-top: 10px;
+  border-bottom: 1px solid orange;
 }
 .footer>a{
   display: inline;
   padding: 5px;
   line-height: 20px;
-  color: red;
   text-decoration: none;
 }
 </style>

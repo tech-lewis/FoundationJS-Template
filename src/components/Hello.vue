@@ -5,11 +5,13 @@
       <button @click="handle">Show List</button>
       <label for="name">name</label>
       <input type="text" v-model="msg">
-      <!-- <address></address> -->
+      
+      <button @click="toUserPage">回到用户中心</button>
     </div>
     <group v-if="isShow">
       <cell v-for="item in values" :key="item" v-bind:title="item" value="切换语言"></cell>
     </group>
+    <Datetime />
     <!-- <group>
     </group> -->
   </div>
@@ -21,13 +23,13 @@
 // by this way, you can reduce webpack bundle size
 import Group from 'vux/components/group/'
 import Cell from 'vux/components/cell/'
-import vButton from 'vux/components/button/'
+import Datetime from 'vux/components/button/'
 import { Alert } from 'vux'
 export default {
   components: {
     Group,
     Cell,
-    vButton,
+    Datetime,
     Alert
   },
   data () {
@@ -38,6 +40,9 @@ export default {
     }
   },
   methods: {
+    toUserPage () {
+      window.router.go('/user/Hello/profile/Vue')
+    },
     handle () {
       if (/Firefox/.test(window.navigator.userAgent)) {
         alert('firefox')

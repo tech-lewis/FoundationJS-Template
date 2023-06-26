@@ -5,7 +5,9 @@
     <!-- <group v-if="isShow">
       <cell v-for="item in values" :key="item" title="item" value="切换语言"></cell>
     </group> -->
-    <div v-for="item in values" :key="item">{{item}}</div>
+    <div v-for="item in values" :key="item">
+      <div class="item">{{item}}</div>
+    </div>
     <router-view></router-view>
   </div>
 </template>
@@ -45,3 +47,19 @@
     }
   }
 </script>
+<style scoped>
+.item {
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding: 0 10px;
+  margin-bottom: 8px;
+  text-align: center;
+  width: 100px;
+}
+
+.item:hover {
+  border: 1px solid orange;
+  color: orange;
+  width: 100px;
+}
+</style>
