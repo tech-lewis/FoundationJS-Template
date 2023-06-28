@@ -9,8 +9,8 @@
   },
   "dependencies": {
     "vue": "<=1.0.0",
-    "vuex": "^1.0.0",
-    "vue-router": "^0.7.13"
+    "vue-router": "^0.7.13",
+    "vuex": "^1.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
