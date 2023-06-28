@@ -8,11 +8,14 @@
     <app id="app"></app>
     <script src="dist/build.js"></script>  
     <script type="text/javascript" charset="utf-8">
-      var ipc = require('ipc');
-      window.addEventListener('contextmenu', function (e) {
-        e.preventDefault();
-        ipc.send('menu');
-      }, false);
+      if (/Atom/.test(window.navigator.userAgent)) {
+        alert('Welcome to Electron')
+        var ipc = require('ipc');
+        window.addEventListener('contextmenu', function (e) {
+          e.preventDefault();
+          ipc.send('menu');
+        }, false);
+      }
     </script>
   </body>
 </html>
