@@ -4,7 +4,7 @@
     <p v-show="authenticating" style="color:red">Authenticating...</p>
     <h1 class="header">Header</h1>
     <div class="footer">
-      <a v-link="{ path: '/user/1234/profile/what' }">user</a>
+      <a v-link="{ path: '/user/Hello/profile/Mark' }">user</a>
       <a v-link="{ path: '/about' }">about</a>
       <a v-link="{ path: '/welcome' }">主页</a>
       <a v-link="{ path: '/forbidden' }">forbidden</a>
@@ -34,7 +34,7 @@ body {
   background: #ccc;
 }
 .header {
-  background: black;
+  background: gray;
   color: white;
   padding: 10px;
   border: 1px solid #ccc;
