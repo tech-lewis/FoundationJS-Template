@@ -1,3 +1,3 @@
 <template>
-  <p>FOUR OH FOUR</p>
+  <p>404 Not found</p>
 </template>
