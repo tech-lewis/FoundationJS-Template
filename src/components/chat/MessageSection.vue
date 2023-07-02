@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import store from '../store'
+import store from '../../store'
 import Message from './Message.vue'
 
 export default {

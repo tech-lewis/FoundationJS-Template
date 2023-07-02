@@ -11,6 +11,11 @@ import {configRouter} from './route-config'
 import { Button } from 'vux'
 // import 'styles/base.css'
 // import 'styles/index.css'
+import store from './store'
+
+Vue.filter('time', timestamp => {
+  return new Date(timestamp).toLocaleTimeString()
+})
 Vue.component('v-button', Button)
 // install router
 Vue.use(VueRouter)
@@ -32,3 +37,4 @@ router.start(App, '#app')
 
 // just for debugging
 window.router = router
+store.actions.getAllMessages()

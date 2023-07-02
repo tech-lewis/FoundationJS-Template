@@ -5,13 +5,12 @@
     <!-- <group v-if="isShow">
       <cell v-for="item in values" :key="item" title="item" value="切换语言"></cell>
     </group> -->
-    <div v-for="item in countries" :key="item">
+    <div v-for="item in countries.slice(0, 11)" :key="item">
       <div class="item" @click="showLanguages(item)">{{item.name}}</div>
     </div>
     <router-view></router-view>
   </div>
 </template>
-
 
 <script>
   import {Alert, Msg, Tab, TabItem, Group, Cell} from 'vux'
