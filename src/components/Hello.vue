@@ -11,7 +11,6 @@
     <group v-if='isShow'>
       <cell v-for='item in countries' :key='item' v-bind:title='item.name' value='点击查看详情(i)'></cell>
     </group>
-    <Datetime />
     <!-- <group>
     </group> -->
   </div>
@@ -23,13 +22,13 @@
 // by this way, you can reduce webpack bundle size
 import Group from 'vux/components/group/'
 import Cell from 'vux/components/cell/'
-import Datetime from 'vux/components/button/'
+// import Datetime from 'vux/components/button/'
 import { Alert } from 'vux'
 export default {
   components: {
     Group,
     Cell,
-    Datetime,
+    // Datetime,
     Alert
   },
   data () {
