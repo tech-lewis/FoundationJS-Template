@@ -1,7 +1,9 @@
 <template>
   <div>
-    <h2>User Center:  您选择国家{{selectedCountries.name}}使用的语言有{{selectedCountries ? selectedCountries.languages.join('/'): ''}}</h2>
-    <p>{{ value }}</p>
+    <div class="topbar">
+      <h2>User Center:  您选择国家{{selectedCountries.name}}</h2>
+      <p>使用的语言有{{ getLanguageDescription }}</p>
+    </div>
     <!-- <group v-if="isShow">
       <cell v-for="item in values" :key="item" title="item" value="切换语言"></cell>
     </group> -->
@@ -204,17 +206,24 @@
           { name: 'Switzerland', languages: ['German', 'French', 'Italian', 'Romansh'] },
           { name: 'Syria', languages: ['Arabic'] },
           { name: 'Taiwan', languages: ['Mandarin'] }
-        ]
+        ],
+        a: 1
       }
     },
     computed: {
-      // selectedTips: {
-      //   return this.selectedCountries.join('/')
-      // }
+      // a computed getter
+      b: function () {
+        // `this` points to the vm instance
+        return this.a + 1
+      },
+      getLanguageDescription: function () {
+        return this.selectedCountries ? this.selectedCountries.languages.join('/') : ''
+      }
     },
     created: function () {
       // `this` points to the vm instance
       console.log('values is: ' + this.values)
+      this.selectedCountries = { name: 'China', languages: ['汉语', '藏语', '维吾尔语', '蒙古语', '壮语', '苗语', '朝鲜语'] }
     },
     methods: {
       showLanguages (item) {
@@ -245,5 +254,8 @@
   border: 1px solid orange;
   color: orange;
   width: 100px;
+}
+.topbar {
+  text-align: center;
 }
 </style>
