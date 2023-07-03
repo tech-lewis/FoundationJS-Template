@@ -29,6 +29,7 @@ export default {
     Group,
     Cell,
     Chat,
+    // Datetime,
     Alert
   },
   data () {
