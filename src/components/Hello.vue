@@ -11,7 +11,8 @@
     <group v-if='isShow'>
       <cell v-for='item in countries' :key='item' v-bind:title='item.name' value='点击查看详情(i)'></cell>
     </group>
-    <!-- <Chat /> -->
+    <!-- <group>
+    </group> -->
   </div>
 </template>
 
@@ -19,7 +20,6 @@
 // import { Group, Cell } from 'vux'
 // or you can import the components you need
 // by this way, you can reduce webpack bundle size
-import Chat from '../pages/ChatPage'
 import Group from 'vux/components/group/'
 import Cell from 'vux/components/cell/'
 // import Datetime from 'vux/components/button/'
@@ -28,7 +28,6 @@ export default {
   components: {
     Group,
     Cell,
-    Chat,
     // Datetime,
     Alert
   },
