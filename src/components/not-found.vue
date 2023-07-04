@@ -1,3 +1,3 @@
 <template>
-  <p>FOUR OH FOUR</p>
+  <p>默认的404页面</p>
 </template>
