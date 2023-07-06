@@ -2,11 +2,12 @@
   <div class="about">
     <h2 style="text-align: center">关于 Pure Navigator</h2>
     <h2 style="text-align: center">Version 1.1.11</h2>
+    <Counter></Counter>
     <div style="height:300px;width:300px; border: 1px solid #f00; overflow:scroll">
       This long div is for testing { saveScrollPosition: true } in html5 mode
-      <group v-if='isShow'>
+      <!-- <group v-if='isShow'>
         <cell v-for='item in countries' :key='item' v-bind:title='item.name' value='点击查看详情(i)' @click='showDetail(item)'></cell>
-      </group>
+      </group> -->
     </div>
     <p id="anchor">This anchor is for testing anchor scrolling in html5 mode</p>
   </div>
@@ -18,13 +19,15 @@
 import Group from 'vux/components/group/'
 import Cell from 'vux/components/cell/'
 import Datetime from 'vux/components/button/'
+import Counter from './Counter'
 import { Alert } from 'vux'
 export default {
   components: {
     Group,
     Cell,
     Datetime,
-    Alert
+    Alert,
+    Counter
   },
   data () {
     return {
