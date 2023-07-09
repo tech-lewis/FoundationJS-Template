@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     Clicked: {{ count }} times
     <button @click="increment">+</button>
     <button @click="decrement">-</button>
@@ -20,3 +20,10 @@ export default {
   methods: store.actions
 }
 </script>
+
+<style scoped>
+.container
+{
+  text-align: center;
+}
+</style>

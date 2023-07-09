@@ -224,7 +224,7 @@
     },
     created: function () {
       // `this` points to the vm instance
-      console.log('values is: ' + this.values)
+      // console.log('values is: ' + this.values)
       this.selectedCountries = { name: 'China', languages: ['汉语', '藏语', '维吾尔语', '蒙古语', '壮语', '苗语', '朝鲜语'] }
     },
     methods: {
