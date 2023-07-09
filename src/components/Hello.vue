@@ -8,6 +8,7 @@
       
       <button @click='toUserPage'>回到用户中心</button>
     </div>
+    <Counter></Counter>
     <group v-if='isShow'>
       <cell v-for='item in countries' :key='item' v-bind:title='item.name' value='点击查看详情(i)'></cell>
     </group>
@@ -24,8 +25,10 @@ import Group from 'vux/components/group/'
 import Cell from 'vux/components/cell/'
 // import Datetime from 'vux/components/button/'
 import { Alert } from 'vux'
+import Counter from './Counter'
 export default {
   components: {
+    Counter,
     Group,
     Cell,
     // Datetime,

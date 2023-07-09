@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Vuex from '../../src'
+import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
@@ -51,6 +51,7 @@ const actions = {
 const mutations = {
   [INCREMENT] (state) {
     state.count++
+    console.log(state.count)
   },
   [DECREMENT] (state) {
     state.count--
@@ -61,11 +62,10 @@ const mutations = {
 // and the mutations. Because the actions and mutations are just
 // functions that do not depend on the instance itself, they can
 // be easily tested or even hot-reloaded (see counter-hot example).
-// 
+export default new Vuex.Store({
 // You can also provide middlewares, which is just an array of
 // objects containing some hooks to be called at initialization
 // and after each mutation.
-export default new Vuex.Store({
   state,
   actions,
   mutations
