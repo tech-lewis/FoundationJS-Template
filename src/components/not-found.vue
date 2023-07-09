@@ -1,3 +1,3 @@
 <template>
-  <p>404 Not found</p>
+  <p>404 默认页面</p>
 </template>
