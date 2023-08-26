@@ -31,7 +31,7 @@ export default {
 <style>
 body {
   font-family: Helvetica, sans-serif;
-  background: #ccc;
+  background: #F5FCFF;
 }
 .header {
   background: gray;
