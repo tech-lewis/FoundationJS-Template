@@ -5,11 +5,11 @@
     <title></title>
   </head>
   <body>
-		<div id="test" sd-on-click="changeMessage | .button">
-      <p sd-text="msg | capitalize"></p>
-      <p sd-show="something">YOYOYO</p>
-      <p class="button" sd-text="msg"></p>
-      <p sd-class-red="error" sd-text="hello"></p>
+		<div id="test" x-on-click="changeMessage | .button">
+      <p x-text="msg | capitalize"></p>
+      <p x-show="something">YOYOYO</p>
+      <button class="button" x-text="msg"></button>
+      <p x-class-red="error" x-text="hello"></p>
     </div>
     <script src="dist/build.js"></script>
   </body>

@@ -1,6 +1,6 @@
 import Directives from './directives'
 import Filters from './filters'
-var prefix = 'sd'
+var prefix = 'x'
 var selector = Object.keys(Directives).map(function (d) {
         return '[' + prefix + '-' + d + ']'
     }).join()
