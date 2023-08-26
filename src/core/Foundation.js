@@ -1,57 +1,133 @@
-import config from './config'
-import filters from './filters'
-import UX from './UX'
-import directives from './directives/index'
+import Directives from './directives'
+import Filters from './filters'
+var prefix = 'sd'
+var selector = Object.keys(Directives).map(function (d) {
+        return '[' + prefix + '-' + d + ']'
+    }).join()
 
-var controllers = config.controllers
-var datum = config.datum
-var api = {}
-// API
-api.data = function (id, data) {
-	if (!data) return datum[id]
-	if (datum[id]) {
-		console.warn('data object "' + id + '"" already exists and has been overwritten.')
-	}
-	datum[id] = data
+function Seed (opts) {
+    var self = this
+    var root = this.el = document.getElementById(opts.id)
+    var els = root.querySelectorAll(selector)
+    var bindings = {} // internal real data
+    self.scope = {} // external interface
+
+    // process nodes for directives
+    ;[].forEach.call(els, processNode)
+    processNode(root)
+
+    // initialize all variables by invoking setters
+    for (var key in bindings) {
+        self.scope[key] = opts.scope[key]
+    }
+
+    function processNode (el) {
+        cloneAttributes(el.attributes).forEach(function (attr) {
+            var directive = parseDirective(attr)
+            if (directive) {
+                bindDirective(self, el, bindings, directive)
+            }
+        })
+    }
 }
 
-api.controller = function (id, extensions) {
-	if (!extensions) return controllers[id]
-	if (controllers[id]) {
-		console.warn('controller "' + id + '" already exists and has been overwritten.')
-	}
-	controllers[id] = extensions
+// clone attributes so they don't change
+function cloneAttributes (attributes) {
+    return [].map.call(attributes, function (attr) {
+        return {
+            name: attr.name,
+            value: attr.value
+        }
+    })
 }
 
-api.directive = function (name, fn) {
-	if (!fn) return directives[name]
-	directives[name] = fn
+function bindDirective (seed, el, bindings, directive) {
+    el.removeAttribute(directive.attr.name)
+    var key = directive.key
+    var binding = bindings[key]
+    if (!binding) {
+        bindings[key] = binding = {
+            value: undefined,
+            directives: []
+        }
+    }
+    directive.el = el
+    binding.directives.push(directive)
+    // invoke bind hook if exists
+    if (directive.bind) {
+        directive.bind(el, binding.value)
+    }
+    if (!seed.scope.hasOwnProperty(key)) {
+        bindAccessors(seed, key, binding)
+    }
 }
 
-api.filter = function (name, fn) {
-	if (!fn) return filters[name]
-	filters[name] = fn
+function bindAccessors (seed, key, binding) {
+    Object.defineProperty(seed.scope, key, {
+        get: function () {
+            return binding.value
+        },
+        set: function (value) {
+            binding.value = value
+            binding.directives.forEach(function (directive) {
+                if (value && directive.filters) {
+                    value = applyFilters(value, directive)
+                }
+                directive.update(
+                    directive.el,
+                    value,
+                    directive.argument,
+                    directive,
+                    seed
+                )
+            })
+        }
+    })
 }
 
-api.bootstrap = function (opts) {
-	if (opts) {
-		config.prefix = opts.prefix || config.prefix
-	}
-	var app = {}
-	var n = 0
-	var el
-	var seed
-	var selector = '[' + config.prefix + '-controller]'
-	/* jshint boss: true */
-	var data = (el = document.querySelector(selector))
-	while (data) {
-		seed = new UX(el)
-		if (el.id) {
-			app['$' + el.id] = seed
-		}
-		n++
-	}
-	return n > 1 ? app : seed
+function parseDirective (attr) {
+    if (attr.name.indexOf(prefix) === -1) return
+
+    // parse directive name and argument
+    var noprefix = attr.name.slice(prefix.length + 1)
+    var argIndex = noprefix.indexOf('-')
+    var dirname = argIndex === -1 ? noprefix : noprefix.slice(0, argIndex)
+    var def = Directives[dirname]
+    var arg = argIndex === -1 ? null : noprefix.slice(argIndex + 1)
+
+    // parse scope variable key and pipe filters
+    var exp = attr.value
+    var pipeIndex = exp.indexOf('|')
+    var key = pipeIndex === -1 ? exp.trim() : exp.slice(0, pipeIndex).trim()
+	var filters = pipeIndex === -1 ? null : exp.slice(pipeIndex + 1).split('|').map(function (filter) { return filter.trim() })
+    return def ? {
+            attr: attr,
+            key: key,
+            filters: filters,
+            definition: def,
+            argument: arg,
+            update: typeof def === 'function' ? def : def.update
+        }
+        : null
 }
 
-export default api
+function applyFilters (value, directive) {
+    if (directive.definition.customFilter) {
+        return directive.definition.customFilter(value, directive.filters)
+    } else {
+        directive.filters.forEach(function (filter) {
+            if (Filters[filter]) {
+                value = Filters[filter](value)
+            }
+        })
+        return value
+    }
+}
+
+export default {
+    create: function (opts) {
+        return new Seed(opts)
+    },
+    filters: Filters,
+    directives: Directives
+}

@@ -1,12 +1,13 @@
-import api from './core/Foundation'
-var app = api.create({
-  id: 'test',
-  // template
-  scope: {
-    msg: 'hello',
-    hello: 'WHWHWHW',
-    changeMessage: function () {
-        app.scope.msg = 'hola'
+import API from './core/Foundation'
+var app = API.create({
+    id: 'test',
+    // template
+    scope: {
+        msg: 'hello',
+        hello: 'hello Foundation JS',
+        changeMessage: function () {
+            app.scope.msg = 'hola'
+            alert('click')
+        }
     }
-  }
 })

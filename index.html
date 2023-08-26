@@ -5,7 +5,12 @@
     <title></title>
   </head>
   <body>
-    <app></app>
+		<div id="test" sd-on-click="changeMessage | .button">
+      <p sd-text="msg | capitalize"></p>
+      <p sd-show="something">YOYOYO</p>
+      <p class="button" sd-text="msg"></p>
+      <p sd-class-red="error" sd-text="hello"></p>
+    </div>
     <script src="dist/build.js"></script>
   </body>
 </html>
