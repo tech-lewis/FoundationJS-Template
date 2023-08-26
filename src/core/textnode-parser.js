@@ -1,5 +1,5 @@
 export default {
-    parse: function (node) {
-        return node
-    }
+  parse: function (node) {
+    return node
+  }
 }
