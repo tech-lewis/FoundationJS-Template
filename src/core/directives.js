@@ -1,6 +1,7 @@
-import controllers from './controllers'
+import Seed from './Foundation'
 import watchArray from './watchArray'
 import config from './config'
+
 export default {
   text: function (value) {
     this.el.textContent = value || ''
@@ -14,17 +15,12 @@ export default {
   on: {
     update: function (handler) {
       var event = this.arg
-      if (!this.handlers) {
-        this.handlers = {}
-      }
-      var handlers = this.handlers
-      if (handlers[event]) {
-        this.el.removeEventListener(event, handlers[event])
+      if (this.handler) {
+        this.el.removeEventListener(event, this.handler)
       }
       if (handler) {
-        handler = handler.bind(this.seed)
         this.el.addEventListener(event, handler)
-        handlers[event] = handler
+        this.handler = handler
       }
     },
     unbind: function () {
@@ -34,12 +30,12 @@ export default {
       }
     }
   },
-  for: {
+  each: {
     bind: function () {
-      this.el['sd-block'] = true
+      this.el.removeAttribute(config.prefix + '-each')
       this.prefixRE = new RegExp('^' + this.arg + '.')
       var ctn = this.container = this.el.parentNode
-      this.marker = document.createComment('sd-each-' + this.arg + '-marker')
+      this.marker = document.createComment('x-each-' + this.arg + '-marker')
       ctn.insertBefore(this.marker, this.el)
       ctn.removeChild(this.el)
       this.childSeeds = []
@@ -56,21 +52,20 @@ export default {
       collection.forEach(function (item, i) {
         self.childSeeds.push(self.buildItem(item, i, collection))
       })
+      console.log('collection creation done.')
     },
     mutate: function (mutation) {
       console.log(mutation)
     },
     buildItem: function (data, index, collection) {
-      var Seed = require('./Foundation')
       var node = this.el.cloneNode(true)
-      var ctrl = node.getAttribute(config.prefix + '-controller')
-      var Ctrl = ctrl ? controllers[ctrl] : Seed
-      if (ctrl) node.removeAttribute(config.prefix + '-controller')
-      var spore = new Ctrl(node, data, {
+      var spore = new Seed(node, data, {
         eachPrefixRE: this.prefixRE,
-        parentScope: this.seed.scope
+        parentSeed: this.seed
       })
+      console.log('构造函数什么的')
       this.container.insertBefore(node, this.marker)
+      // console.log('构造函数什么的2')
       collection[index] = spore.scope
       return spore
     }

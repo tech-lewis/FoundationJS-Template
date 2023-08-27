@@ -23,7 +23,7 @@
       <ul x-show="todos">
         <li class="todo"
               x-controller="Todo"
-              x-for="todo:todos"
+              x-each="todo:todos"
               x-class="done:todo.done"
               x-on="click:todo.toggle"
               x-text="todo.title"
