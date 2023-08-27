@@ -1,3 +1,13 @@
+function delegateCheck (current, top, selector) {
+  if (current.webkitMatchesSelector(selector)) {
+    return true
+  } else if (current === top) {
+    return false
+  } else {
+    return delegateCheck(current.parentNode, top, selector)
+  }
+}
+
 export default {
   capitalize: function (value) {
     value = value.toString()
@@ -6,12 +16,13 @@ export default {
   uppercase: function (value) {
     return value.toUpperCase()
   },
-  delegate: function (handler, selectors) {
+  delegate: function (handler, args) {
+    var selector = args[0]
     return function (e) {
-      var match = selectors.every(function (selector) {
-        return e.target.webkitMatchesSelector(selector)
-      })
-      if (match) handler.apply(this, arguments)
+      console.log('triggered')
+      if (delegateCheck(e.target, e.currentTarget, selector)) {
+        handler.apply(this, arguments)
+      }
     }
   }
 }

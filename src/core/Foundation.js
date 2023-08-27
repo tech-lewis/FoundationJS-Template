@@ -1,162 +1,138 @@
-import Directives from './directives'
-// import Directive from './directive'
-import Filters from './filters'
-var prefix = 'x'
-var selector = Object.keys(Directives).map(function (d) {
-  return '[' + prefix + '-' + d + ']'
-}).join()
+import config from './config'
+import bindingParser from './binding'
 
-function Seed (opts) {
+var map = Array.prototype.map
+var each = Array.prototype.forEach
 
-  var self = this
-  var root = this.el = document.getElementById(opts.id)
-  var els = root.querySelectorAll(selector)
+function Seed (el, data, options) {
+  if (typeof el === 'string') {
+    el = document.querySelector(el)
+  }
 
-  var bindings = self._bindings = {} // internal real data
-  self.scope = {} // external interface
+  this.el = el
+  this.scope = data
+  this._bindings = {}
+  this._options = options || {}
 
+  var key
+  var dataCopy = {}
+  for (key in data) {
+    dataCopy[key] = data[key]
+  }
   // process nodes for directives
-  ;[].forEach.call(els, processNode)
-  processNode(root)
-
+  this._compileNode(el)
   // initialize all variables by invoking setters
-  for (var key in bindings) {
-      self.scope[key] = opts.scope[key]
+  for (key in this._bindings) {
+    this.scope[key] = dataCopy[key]
+  }
+}
+
+Seed.prototype._compileNode = function (node) {
+  var self = this
+  var ctrl = config.prefix + '-controller'
+
+  if (node.nodeType === 3) {
+    // text node
+    self._compileTextNode(node)
+  } else if (node.attributes && node.attributes.length) {
+    // clone attributes because the list can change
+    var attrs = map.call(node.attributes, function (attr) {
+      return {
+        name: attr.name,
+        expressions: attr.value.split(',')
+      }
+    })
+    attrs.forEach(function (attr) {
+      if (attr.name === ctrl) return
+      attr.expressions.forEach(function (exp) {
+        var binding = bindingParser.parse(attr.name, exp)
+        if (binding) {
+          self._bind(node, binding)
+        }
+      })
+    })
+  }
+  if (!node['sd-block'] && node.childNodes.length) {
+    each.call(node.childNodes, function (child) {
+      self._compileNode(child)
+    })
+  }
+}
+
+Seed.prototype._compileTextNode = function (node) {
+  return node
+}
+Seed.prototype._bind = function (node, bindingInstance) {
+
+  bindingInstance.seed = this
+  bindingInstance.el = node
+
+  node.removeAttribute(config.prefix + '-' + bindingInstance.directiveName)
+
+  var key = bindingInstance.key
+  var scope = this.scope
+  var epr = this._options.eachPrefixRE
+  var isEach = epr && epr.test(key)
+  // TODO make scope chain work on nested controllers
+  if (isEach) {
+    key = key.replace(epr, '')
+    scope = this._options.parentScope
   }
 
-  function processNode (el) {
-      cloneAttributes(el.attributes).forEach(function (attr) {
-          var directive = parseDirective(attr)
-          if (directive) {
-              bindDirective(self, el, bindings, directive)
-          }
-      })
+  var binding = this._bindings[key] || this._createBinding(key, scope)
+
+  // add directive to this binding
+  binding.instances.push(bindingInstance)
+
+  // invoke bind hook if exists
+  if (bindingInstance.bind) {
+    bindingInstance.bind(binding.value)
   }
+}
+
+Seed.prototype._createBinding = function (key, scope) {
+
+  var binding = {
+    value: null,
+    instances: []
+  }
+
+  this._bindings[key] = binding
+
+  // bind accessor triggers to scope
+  Object.defineProperty(scope, key, {
+    get: function () {
+      return binding.value
+    },
+    set: function (value) {
+      binding.value = value
+      binding.instances.forEach(function (instance) {
+        instance.update(value)
+      })
+    }
+  })
+
+  return binding
 }
 
 Seed.prototype.dump = function () {
   var data = {}
   for (var key in this._bindings) {
-      data[key] = this._bindings[key].value
+    data[key] = this._bindings[key].value
   }
   return data
 }
 
 Seed.prototype.destroy = function () {
   for (var key in this._bindings) {
-      this._bindings[key].directives.forEach(function (directive) {
-          if (directive.definition.unbind) {
-              directive.definition.unbind(
-                  directive.el,
-                  directive.argument,
-                  directive
-              )
-          }
-      })
+    this._bindings[key].instances.forEach(unbind)
+      ; delete this._bindings[key]
   }
-  this.el.parentNode.remove(this.el)
-}
-
-// clone attributes so they don't change
-function cloneAttributes (attributes) {
-  return [].map.call(attributes, function (attr) {
-      return {
-          name: attr.name,
-          value: attr.value
-      }
-  })
-}
-
-function bindDirective (seed, el, bindings, directive) {
-  directive.el = el
-  el.removeAttribute(directive.attr.name)
-  var key = directive.key
-  var binding = bindings[key]
-  if (!binding) {
-      bindings[key] = binding = {
-          value: undefined,
-          directives: []
-      }
-  }
-  binding.directives.push(directive)
-  // invoke bind hook if exists
-  if (directive.bind) {
-      directive.bind(el, binding.value)
-  }
-  if (!seed.scope.hasOwnProperty(key)) {
-      bindAccessors(seed, key, binding)
+  this.el.parentNode.removeChild(this.el)
+  function unbind (instance) {
+    if (instance.unbind) {
+      instance.unbind()
+    }
   }
 }
-
-function bindAccessors (seed, key, binding) {
-  Object.defineProperty(seed.scope, key, {
-      get: function () {
-          return binding.value
-      },
-      set: function (value) {
-          binding.value = value
-          binding.directives.forEach(function (directive) {
-              var filteredValue = value
-              if (value && directive.filters) {
-                  filteredValue = applyFilters(value, directive)
-              }
-              directive.update(
-                  directive.el,
-                  filteredValue,
-                  directive.argument,
-                  directive,
-                  seed
-              )
-          })
-      }
-  })
-}
-
-function parseDirective (attr) {
-
-  if (attr.name.indexOf(prefix) === -1) return
-  // parse directive name and argument
-  var noprefix = attr.name.slice(prefix.length + 1)
-  var argIndex = noprefix.indexOf('-')
-  var dirname = argIndex === -1 ? noprefix : noprefix.slice(0, argIndex)
-  var def = Directives[dirname]
-  var arg = argIndex === -1 ? null : noprefix.slice(argIndex + 1)
-
-  // parse scope variable key and pipe filters
-  var exp = attr.value
-  var pipeIndex = exp.indexOf('|')
-  var key = pipeIndex === -1 ? exp.trim() : exp.slice(0, pipeIndex).trim()
-  var filters = pipeIndex === -1 ? null : exp.slice(pipeIndex + 1).split('|').map(function (filter) {
-              return filter.trim()
-          })
-
-  return def ? {
-          attr: attr,
-          key: key,
-          filters: filters,
-          definition: def,
-          argument: arg,
-          update: typeof def === 'function' ? def : def.update
-      }
-      : null
-}
-
-function applyFilters (value, directive) {
-  if (directive.definition.customFilter) {
-      return directive.definition.customFilter(value, directive.filters)
-  } else {
-      directive.filters.forEach(function (filter) {
-          if (Filters[filter]) {
-              value = Filters[filter](value)
-          }
-      })
-      return value
-  }
-}
-export default {
-  create: function (opts) {
-    return new Seed(opts)
-  },
-  filters: Filters,
-  directives: Directives
-}
+export default Seed

@@ -3,30 +3,81 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <style type="text/css">
+			.red {
+				color: red;
+			}
+      .todo.done {
+          text-decoration: line-through;
+      }
+    </style>
   </head>
+  
   <body>
-		<div id="test" x-on-click="changeMessage | .button">
-      <p x-text="msg | capitalize"></p>
-      <p x-show="something">YOYOYO</p>
-      <button class="button" x-text="msg"></button>
-      <p x-class-red="error" x-text="hello"></p>
-    </div>
-    <script src="dist/build.js"></script>
-    <script>
-      var app = UIKit.create({
-        id: 'test',
-        // template
-        scope: {
-          msg: 'hello',
-          hello: 'Power by Foundation JS',
-          something: true,
-          changeMessage: function () {
-              app.scope.msg = 'clicked hello'
-              app.scope.something = false
-              alert('click')
+    <div id="app" x-controller="TodoList">
+      <p x-text="msg | capitalize" x-on="click:changeMessage"></p>
+      <p x-text="msg | uppercase"></p>
+      <p x-on="click:remove">bye</p>
+      <p x-text="total | money"></p>
+      <p x-class="red:error" x-show="error">Error</p>
+      <ul x-show="todos">
+        <li class="todo"
+              x-controller="Todo"
+              x-for="todo:todos"
+              x-class="done:todo.done"
+              x-on="click:todo.toggle"
+              x-text="todo.title"
+          > 1 </li>
+      </ul>
+  </div>
+  <script src="dist/build.js"></script>  
+  <script>
+    UIKit.filter('money', function (value) {
+      return value ? '$' + value.toFixed(2) : ''
+    })
+
+    UIKit.controller('TodoList', {
+      changeMessage: function () {
+        this.scope.msg = 'It works!'
+      },
+      remove: function () {
+        this.destroy()
+      }
+    })
+
+    UIKit.controller('Todo', {
+      toggle: function () {
+        this.scope.done = !scope.done
+      }
+    })
+
+    var s = Date.now()
+
+    var app = UIKit.bootstrap({
+          el: '#app',
+          data: {
+              msg: 'hello!',
+              total: 9911199,
+              error: true,
+              todos: [
+                  {
+                      title: 'hello!',
+                      done: true
+                  },
+                  {
+                      title: 'hello!!',
+                      done: false
+                  },
+                  {
+                      title: 'hello!!!',
+                      done: false
+                  }
+              ]
           }
-        }
       })
+
+      console.log(Date.now() - s + 'ms')
+
     </script>
   </body>
 </html>

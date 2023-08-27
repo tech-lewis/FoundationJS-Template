@@ -1,14 +1,14 @@
-var proto = Array.prototype,
-  slice = proto.slice,
-  mutatorMethods = [
-    'pop',
-    'push',
-    'reverse',
-    'shift',
-    'unshift',
-    'splice',
-    'sort'
-  ]
+var proto = Array.prototype
+var slice = proto.slice
+var mutatorMethods = [
+  'pop',
+  'push',
+  'reverse',
+  'shift',
+  'unshift',
+  'splice',
+  'sort'
+]
 
 export default function (arr, callback) {
   mutatorMethods.forEach(function (method) {
@@ -21,5 +21,4 @@ export default function (arr, callback) {
       })
     }
   })
-
 }
