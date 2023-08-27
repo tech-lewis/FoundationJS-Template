@@ -6,7 +6,7 @@ var slice = Array.prototype.slice
 var	ctrlAttr = config.prefix + '-controller'
 var	eachAttr = config.prefix + '-each'
 
-function UX (el, options) {
+function UI (el, options) {
 
 	if (typeof el === 'string') {
 		el = document.querySelector(el)
@@ -56,7 +56,7 @@ function UX (el, options) {
 	}
 }
 
-UX.prototype._compileNode = function (node, root) {
+UI.prototype._compileNode = function (node, root) {
 	var self = this
 
 	if (node.nodeType === 3) { // text node
@@ -77,7 +77,7 @@ UX.prototype._compileNode = function (node, root) {
 		} else if (ctrlExp && !root) { // nested controllers
 
 			var id = node.id
-			var seed = new UX(node, {
+			var seed = new UI(node, {
 					child: true,
 					parentSeed: self
 				})
@@ -113,11 +113,11 @@ UX.prototype._compileNode = function (node, root) {
 	}
 }
 
-UX.prototype._compileTextNode = function (node) {
+UI.prototype._compileTextNode = function (node) {
 	return TextNodeParser.parse(node)
 }
 
-UX.prototype._bind = function (node, directive) {
+UI.prototype._bind = function (node, directive) {
 
 	directive.el = node
 	directive.seed = this
@@ -169,7 +169,7 @@ UX.prototype._bind = function (node, directive) {
 
 }
 
-UX.prototype._createBinding = function (key) {
+UI.prototype._createBinding = function (key) {
 
 	var binding = {
 		value: this.scope[key],
@@ -200,7 +200,7 @@ UX.prototype._createBinding = function (key) {
 	return binding
 }
 
-UX.prototype._unbind = function () {
+UI.prototype._unbind = function () {
 	var unbind = function (instance) {
 		if (instance.unbind) {
 			instance.unbind()
@@ -211,7 +211,7 @@ UX.prototype._unbind = function () {
 	}
 }
 
-UX.prototype._destroy = function () {
+UI.prototype._destroy = function () {
 	this._unbind()
 	delete this.el.seed
 	this.el.parentNode.removeChild(this.el)
@@ -220,7 +220,7 @@ UX.prototype._destroy = function () {
 	}
 }
 
-UX.prototype._dump = function () {
+UI.prototype._dump = function () {
 	var dump = {}
 	var val
 	var subDump = function (scope) {
@@ -256,4 +256,4 @@ function determinScope (key, scope) {
 	return scope
 }
 
-export default UX
+export default UI
