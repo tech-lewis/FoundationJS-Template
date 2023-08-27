@@ -1,6 +1,7 @@
 export default {
-	prefix: 'sd',
+	prefix: 'x',
 	controllers: {},
+	selector: null,
 	datum: {},
 	seeds: {}
 }
