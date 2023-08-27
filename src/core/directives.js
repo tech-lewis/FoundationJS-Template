@@ -4,38 +4,68 @@ import config from './config'
 
 export default {
   text: function (value) {
-    this.el.textContent = value || ''
+    this.el.textContent = value === null ? '' : value.toString()
   },
   show: function (value) {
     this.el.style.display = value ? '' : 'none'
   },
   class: function (value) {
-    this.el.classList[value ? 'add' : 'remove'](this.arg)
+    if (this.arg) {
+      this.el.classList[value ? 'add' : 'remove'](this.arg)
+    } else {
+      this.el.classList.remove(this.lastVal)
+      this.el.classList.add(value)
+      this.lastVal = value
+    }
+  },
+  checked: {
+    bind: function () {
+      var el = this.el
+      var self = this
+      this.change = function () {
+        self.seed.scope[self.key] = el.checked
+      }
+      el.addEventListener('change', this.change)
+    },
+    update: function (value) {
+      this.el.checked = value
+    },
+    unbind: function () {
+      this.el.removeEventListener('change', this.change)
+    }
   },
   on: {
     update: function (handler) {
+      var self = this
       var event = this.arg
       if (this.handler) {
         this.el.removeEventListener(event, this.handler)
       }
       if (handler) {
-        this.el.addEventListener(event, handler)
-        this.handler = handler
+        var proxy = function (e) {
+          handler({
+            el: e.currentTarget,
+            originalEvent: e,
+            directive: self,
+            seed: self.seed
+          })
+        }
+        this.el.addEventListener(event, proxy)
+        this.handler = proxy
       }
     },
     unbind: function () {
       var event = this.arg
       if (this.handlers) {
-        this.el.removeEventListener(event, this.handlers[event])
+        this.el.removeEventListener(event, this.handler)
       }
     }
   },
   each: {
     bind: function () {
       this.el.removeAttribute(config.prefix + '-each')
-      this.prefixRE = new RegExp('^' + this.arg + '.')
       var ctn = this.container = this.el.parentNode
-      this.marker = document.createComment('x-each-' + this.arg + '-marker')
+      this.marker = document.createComment('x-each-' + this.arg)
       ctn.insertBefore(this.marker, this.el)
       ctn.removeChild(this.el)
       this.childSeeds = []
@@ -52,7 +82,6 @@ export default {
       collection.forEach(function (item, i) {
         self.childSeeds.push(self.buildItem(item, i, collection))
       })
-      console.log('collection creation done.')
     },
     mutate: function (mutation) {
       console.log(mutation)
@@ -60,12 +89,12 @@ export default {
     buildItem: function (data, index, collection) {
       var node = this.el.cloneNode(true)
       var spore = new Seed(node, data, {
-        eachPrefixRE: this.prefixRE,
-        parentSeed: this.seed
+        eachPrefix: this.arg,
+        parentSeed: this.seed,
+        eachIndex: index,
+        eachCollection: collection
       })
-      console.log('构造函数什么的')
       this.container.insertBefore(node, this.marker)
-      // console.log('构造函数什么的2')
       collection[index] = spore.scope
       return spore
     }
