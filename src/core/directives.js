@@ -1,50 +1,46 @@
 export default {
-  text: function (el, value) {
-    el.textContent = value || ''
+  text: function (value) {
+    this.el.textContent = value || ''
   },
-  show: function (el, value) {
-    el.style.display = value ? '' : 'none'
+  show: function (value) {
+    this.el.style.display = value ? '' : 'none'
   },
-  class: function (el, value, classname) {
-    el.classList[value ? 'add' : 'remove'](classname)
+  class: function (value) {
+    this.el.classList[value ? 'add' : 'remove'](this.arg)
   },
   on: {
-    update: function (el, handler, event, directive) {
-      if (!directive.handlers) {
-        directive.handlers = {}
+    update: function (handler) {
+      var event = this.arg
+      if (!this.handlers) {
+        this.handlers = {}
       }
-      var handlers = directive.handlers
+      var handlers = this.handlers
       if (handlers[event]) {
-        el.removeEventListener(event, handlers[event])
+        this.el.removeEventListener(event, handlers[event])
       }
       if (handler) {
-        handler = handler.bind(el)
-        el.addEventListener(event, handler)
+        handler = handler.bind(this.el)
+        this.el.addEventListener(event, handler)
         handlers[event] = handler
       }
     },
-    unbind: function (el, event, directive) {
-      if (directive.handlers) {
-        el.removeEventListener(event, directive.handlers[event])
-      }
-    },
-    customFilter: function (handler, selectors) {
-      return function (e) {
-        var match = selectors.every(function (selector) {
-          console.log(match)
-          console.log(e.target)
-          if (e.target.webkitMatchesSelector) {
-            return e.target.webkitMatchesSelector(selector)
-          } else if (e.target.msMatchesSelector) {
-            return e.target.msMatchesSelector(selector)
-          } else if (e.target.mozMatchesSelector) {
-            return e.target.mozMatchesSelector(selector)
-          } else {
-            return e.target.matchesSelector(selector)
-          }
-        })
-        if (match) handler.apply(this, arguments)
+    unbind: function () {
+      var event = this.arg
+      if (this.handlers) {
+        this.el.removeEventListener(event, this.handlers[event])
       }
     }
+  },
+
+  each: {
+    update: function () {
+      // augmentArray(collection, this)
+      // console.log('collection updated')
+    }
+    // mutate: function (mutation) {
+    // }
   }
+
 }
+// function augmentArray (collection, directive) {
+// }
