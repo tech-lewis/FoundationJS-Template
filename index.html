@@ -12,5 +12,21 @@
       <p x-class-red="error" x-text="hello"></p>
     </div>
     <script src="dist/build.js"></script>
+    <script>
+      var app = UIKit.create({
+        id: 'test',
+        // template
+        scope: {
+          msg: 'hello',
+          hello: 'Power by Foundation JS',
+          something: true,
+          changeMessage: function () {
+              app.scope.msg = 'clicked hello'
+              app.scope.something = false
+              alert('click')
+          }
+        }
+      })
+    </script>
   </body>
 </html>
