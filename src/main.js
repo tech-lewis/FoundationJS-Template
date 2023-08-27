@@ -4,11 +4,20 @@ var app = API.create({
     // template
     scope: {
         msg: 'hello',
-        hello: 'hello Foundation JS',
+        hello: 'Power by Foundation JS',
         something: true,
         changeMessage: function () {
-            app.scope.msg = 'hola'
+            app.scope.msg = 'clicked hello'
             alert('click')
         }
     }
 })
+
+window.UIKit = API
+// class UIKit {
+//     create (options) {
+//         return API.create(options)
+//     }
+// }
+// var kit = new UIKit()
+// export default kit
