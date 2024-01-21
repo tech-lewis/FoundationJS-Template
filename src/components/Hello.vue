@@ -1,7 +1,7 @@
 <template>
   <div class='container'>
     <div class='hello'>
-      <h1>{{ msg }}</h1>
+      <h1 @click='handle'>{{ msg }}</h1>
       <button @click='handle'>Show List</button>
       <label for='name'>name</label>
       <input type='text' v-model='msg'>
@@ -10,7 +10,7 @@
     </div>
     <Counter></Counter>
     <group v-if='isShow'>
-      <cell v-for='item in countries' :key='item' v-bind:title='item.name' value='点击查看详情(i)'></cell>
+      <cell @click='showDetail(item.name)' v-for='item in countries' :key='item' v-bind:title='item.name' value='点击查看详情(i)'></cell>
     </group>
     <!-- <group>
     </group> -->
@@ -214,7 +214,13 @@ export default {
       ]
     }
   },
+  created () {
+    this.handle()
+  },
   methods: {
+    showDetail (name) {
+      alert(`当前点击的项目:  ${name}`)
+    },
     toUserPage () {
       window.router.go('/user/Hello/profile/Vue')
     },
