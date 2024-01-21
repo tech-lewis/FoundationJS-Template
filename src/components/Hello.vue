@@ -214,6 +214,18 @@ export default {
       ]
     }
   },
+  watch: {
+    msg (newValue, oldValue) {
+      // console.log('修改了名字:' + this.msg)   vm.$watch可以监听第一个参数变量改变 但是需要配置handler对象和方法实现
+      console.log(`${oldValue} ======> ${newValue}`)
+    },
+    'thread.lastMessage': function () {
+      this.$nextTick(() => {
+        const ul = this.$els.list
+        ul.scrollTop = ul.scrollHeight
+      })
+    }
+  },
   created () {
     this.handle()
   },
