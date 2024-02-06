@@ -24,6 +24,10 @@ module.exports = {
         loader: 'vue'
       },
       {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
+      },
+      {
         test: /\.js$/,
         loader: 'babel!eslint',
         exclude: /node_modules/
