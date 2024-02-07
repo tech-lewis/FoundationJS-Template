@@ -3,7 +3,6 @@
     <!-- <div class="logo"><img src="./assets/logo.png"></div> -->
     <p v-show="authenticating" style="color:red">Authenticating...</p>
     <h1 class="header">Header</h1>
-    <ui-button>111</ui-button>
     <div class="footer">
       <a v-link="{ path: '/user/Hello/profile/Mark' }">user</a>
       <a v-link="{ path: '/about' }">about</a>

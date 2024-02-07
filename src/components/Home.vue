@@ -5,7 +5,6 @@
       <button @click='handle'>Show List</button>
       <label for='name'>name</label>
       <input type='text' v-model='msg'>
-      
       <button @click='toUserPage'>回到用户中心</button>
     </div>
     <Counter></Counter>
