@@ -33,7 +33,7 @@ export default {
   },
   data () {
     return {
-      msg: 'Hello World!',
+      msg: 'iTunes version history',
       isShow: false,
       version_history: [
         {
