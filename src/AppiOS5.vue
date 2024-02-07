@@ -4,9 +4,9 @@
     <p v-show="authenticating" style="color:red">Authenticating...</p>
     <h1 class="header">Header</h1>
     <div class="footer">
+      <a v-link="{ path: '/welcome' }">主页</a>
       <a v-link="{ path: '/user/Hello/profile/Mark' }">user</a>
       <a v-link="{ path: '/about' }">about</a>
-      <a v-link="{ path: '/welcome' }">主页</a>
       <a v-link="{ path: '/forbidden' }">forbidden</a>
     </div>
     <router-view class="view" transition="test" transition-mode="out-in" keep-alive></router-view>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import Hello from './components/Home.vue'
+import Hello from './components/Hello'
 export default {
   components: {
     Hello
