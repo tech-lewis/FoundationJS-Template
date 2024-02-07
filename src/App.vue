@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import Hello from './components/Hello'
+import Hello from './components/Home.vue'
 import Vue from 'vue'
 import KeenUI from 'keen-ui'
 Vue.use(KeenUI)

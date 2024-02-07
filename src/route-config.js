@@ -12,7 +12,7 @@ export function configRouter (router) {
       // the component can also be a plain string component id,
       // but a component with that id must be available in the
       // App component's scope.
-      component: require('./components/Hello')
+      component: require('./components/Home')
     },
     // nested example
     '/user/:userId': {
