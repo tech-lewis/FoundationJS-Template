@@ -27,10 +27,10 @@ configRouter(router)
 // }) // 如果你再创建一个new Vue instance，那么无法接管 el: 'body'，只可以一一对应的哦
 // boostrap the app
 var App = Vue.extend(require('./App.vue'))
-const str = navigator.userAgent.toLowerCase()
-const iOSVersion = str.match(/cpu iphone os (.*?) like mac os/)
-const isiOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
-if (isiOS && iOSVersion <= 5) App = Vue.extend(require('./AppiOS5.vue'))
+// const str = navigator.userAgent.toLowerCase()
+// const iOSVersion = str.match(/cpu iphone os (.*?) like mac os/)
+// const isiOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
+// if (isiOS && iOSVersion <= 5) App = Vue.extend(require('./AppiOS5.vue'))
 
 // 如果版本大于5.1就使用KeenUI
 router.start(App, '#app')
