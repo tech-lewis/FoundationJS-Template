@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <h2 style="text-align: center">关于 Pure Navigator</h2>
-    <h2 style="text-align: center">Version 1.1.11</h2>
+    <h2 style="text-align: center">Version 1.1.17</h2>
     <div style="height:300px;width:300px; border: 1px solid #f00; overflow:scroll">
       This long div is for testing { saveScrollPosition: true } in html5 mode
       <group v-if='isShow'>

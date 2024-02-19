@@ -4,8 +4,8 @@ import VueRouter from 'vue-router'
 import {configRouter} from './route-config'
 // import router from './router'
 // import * as echarts from 'echarts'
-import KeenUI from 'keen-ui' // 全局引入
 import 'keen-ui/dist/keen-ui.css'
+import KeenUI from 'keen-ui'
 Vue.use(KeenUI)
 /* eslint-disable no-new */
 import { Button } from 'vux'
@@ -27,7 +27,13 @@ configRouter(router)
 //   components: { App }
 // }) // 如果你再创建一个new Vue instance，那么无法接管 el: 'body'，只可以一一对应的哦
 // boostrap the app
-const App = Vue.extend(require('./App.vue'))
+var App = Vue.extend(require('./App.vue'))
+const str = navigator.userAgent.toLowerCase()
+const iOSVersion = str.match(/cpu iphone os (.*?) like mac os/)
+const isiOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
+if (isiOS && iOSVersion <= 5) App = Vue.extend(require('./AppiOS5.vue'))
+window.$isiOS6SystemorNewer = isiOS && iOSVersion >= 6
+// 如果版本大于5.1就使用KeenUI
 router.start(App, '#app')
 
 // just for debugging

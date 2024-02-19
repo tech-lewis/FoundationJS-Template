@@ -2,11 +2,10 @@
   <div class='container'>
     <div class='hello'>
       <h1 @click='handle'>{{ msg }}</h1>
-      <button @click='handle'>Show List</button>
+      <ui-button @click='handle'>Show List</ui-button>
       <label for='name'>name</label>
       <input type='text' v-model='msg'>
-      
-      <button @click='toUserPage'>回到用户中心</button>
+      <ui-button @click='toUserPage'>回到用户中心</ui-button>
     </div>
     <Counter></Counter>
     <group v-if='isShow'>
@@ -26,12 +25,13 @@ import Cell from 'vux/components/cell/'
 // import Datetime from 'vux/components/button/'
 import { Alert } from 'vux'
 import Counter from './Counter'
+import { UiButton} from 'keen-ui'
 export default {
   components: {
     Counter,
     Group,
     Cell,
-    // Datetime,
+    UiButton,
     Alert
   },
   data () {
@@ -239,8 +239,10 @@ export default {
     handle () {
       if (/Firefox/.test(window.navigator.userAgent)) {
         alert('firefox')
+        window.location.href = 'http://www.baidu.com'
+        this.toUserPage()
       } else {
-        this.isShow = true
+        this.isShow = !this.isShow
       }
     }
   }
