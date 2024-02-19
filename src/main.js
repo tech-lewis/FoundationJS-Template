@@ -1,39 +1,116 @@
 import Vue from 'vue'
-// import App from './App'
-import VueRouter from 'vue-router'
-import {configRouter} from './route-config'
-// import router from './router'
-// import * as echarts from 'echarts'
-// import 'keen-ui/dist/keen-ui.css'
+var api = new Firebase('https://hacker-news.firebaseio.com/v0')
+var storiesPerPage = 30
+var topStories = []
 
-/* eslint-disable no-new */
-import { Button } from 'vux'
-// import 'styles/base.css'
-// import 'styles/index.css'
-Vue.component('v-button', Button)
-// install router
-Vue.use(VueRouter)
-// create router
-const router = new VueRouter({
-  history: false,
-  saveScrollPosition: true
+/**
+ * Get the page number from the current hash.
+ *
+ * @return {Number}
+ */
+function getPage () {
+  return +window.location.hash.slice(1) || 1
+}
+
+/**
+ * React to top stories realtime updates.
+ */
+api.child('topstories').on('value', function (snapshot) {
+  topStories = snapshot.val()
+  loadStories()
 })
-// configure router
-configRouter(router)
-// new Vue({
-//   el: 'body',
-//   router: router,
-//   components: { App }
-// }) // 如果你再创建一个new Vue instance，那么无法接管 el: 'body'，只可以一一对应的哦
-// boostrap the app
-var App = Vue.extend(require('./App.vue'))
-// const str = navigator.userAgent.toLowerCase()
-// const iOSVersion = str.match(/cpu iphone os (.*?) like mac os/)
-// const isiOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
-// if (isiOS && iOSVersion <= 5) App = Vue.extend(require('./AppiOS5.vue'))
 
-// 如果版本大于5.1就使用KeenUI
-router.start(App, '#app')
+/**
+ * React to hash change.
+ */
+window.addEventListener('hashchange', loadStories)
 
-// just for debugging
-window.router = router
+/**
+ * Load the stories with pagination.
+ */
+function loadStories () {
+  var page = getPage()
+  if (page > 4) {
+    alert(
+      'Sorry, but the HN API currently only offers the ' +
+      'top 100 items :('
+    )
+    return
+  }
+
+  var stories = []
+  var start = (page - 1) * storiesPerPage
+  var end = page * storiesPerPage
+  var toLoad = Math.min(storiesPerPage, 100 - start)
+  topStories.slice(start, end).forEach(function (id) {
+    api.child('item/' + id).once('value', addItem)
+  })
+
+  function addItem (snapshot) {
+    stories.push(snapshot.val())
+    if (stories.length >= toLoad) {
+      done()
+    }
+  }
+
+  function done () {
+    app.stories = stories
+    app.page = page
+  }
+}
+
+/**
+ * Boot up the Vue app =====================================
+ */
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    page: 1,
+    stories: [],
+    user: null,
+    story: null
+  },
+  created: function () {
+    this.$watch('page', function () {
+      window.scrollTo(0, 0)
+    })
+  },
+  filters: {
+    fromNow: function (time) {
+      var between = Date.now() / 1000 - Number(time)
+      if (between < 3600) {
+        return ~~(between / 60) + ' minutes'
+      } else if (between < 86400) {
+        return ~~(between / 3600) + ' hours'
+      } else {
+        return ~~(between / 86400) + ' days'
+      }
+    },
+    domain: function (url) {
+      var a = document.createElement('a')
+      a.href = url
+      return a.hostname
+    }
+  },
+  methods: {
+    openUser: function (id) {
+      app.story = null
+      api.child('user/' + id).once('value', function (snapshot) {
+        app.user = snapshot.val()
+      })
+    },
+    openComments: function (story) {
+      app.user = null
+      app.story = story
+    },
+    closeSidebar: function () {
+      app.story = app.user = null
+    }
+  }
+})
+// var routes = {
+//   '/home': '',
+//   '/about': '',
+//   '/contact': ''
+// }
