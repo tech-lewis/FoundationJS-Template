@@ -5,7 +5,7 @@
       <ui-button @click='handle'>Show List</ui-button>
       <label for='name'>name</label>
       <input type='text' v-model='msg'>
-      <ui-button @click='toUserPage'>回到用户中心</ui-button>
+      <button @click='toUserPage'>回到用户中心</button>
     </div>
     <Counter></Counter>
     <group v-if='isShow'>
