@@ -1,12 +1,15 @@
 <template>
   <div class="container">
-    B
+    {{title}}
   </div>
 </template>
 
 <script>
 export default {
-
+  name: 'NewsView',
+  data () {
+    return { title: 'NewsList View' }
+  }
 }
 </script>
 

@@ -5,11 +5,6 @@
     <div v-component = 'news-view'></div>
     <!-- main view -->
     <!-- <div v-component="{{view}}" v-transition></div> -->
-    <ul style="list-style: none;">
-      <li v-repeat="items">
-        <h3>{{$index}} - {{name}}</h3>
-      </li>
-    </ul>
   </div>
 </template>
 
@@ -18,13 +13,7 @@ export default {
   el: '#app',
   name: 'AppComponent',
   data () {
-    return {
-      items: [
-        { name: '商品1' },
-        { name: '商品2' },
-        { name: '商品3' }
-      ]
-    }
+    return {}
   },
   components: {
     'news-view': require('./views/news-view.vue'),
