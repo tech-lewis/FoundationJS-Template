@@ -1,8 +1,19 @@
 <template>
   <div class="container">
     <h1>{{title}}</h1>
+    <div class="box">
+      <select v-on="click:clickItem" v-model="optionItem">
+        <option v-repeat="countries" v-bind:value="isSelect">{{$index}}.{{name}}</option>
+      </select>
+      <hr>
+      <span>请输入要查询的国家名称:</span>
+      <input type="text" v-model="keyword" v-on="input: inputChanged">
+      <strong>{{keyword}}</strong>
+      <span> speak</span>
+      <strong>{{selectLanguages.join('/')}}</strong>
+    </div>
     <p style="text-align:center">{{selectLanguages}}</p>
-    <ul class="list" style="list-style: none;" v-on="click:clickItem">
+    <ul class="list" style="list-style: none;">
       <li v-repeat="countries" style="padding: 0 10px;margin-bottom: 18px;hover{color: #0a6aa1};">
         <span style="border: 1px solid #ff8800;padding: 0 10px;border-radius: 5px;text-align: center;font-family: Arial, Helvetica, sans-serif;width: 100px;" class="item">{{$index}} - {{name}}</span>
       </li>
@@ -17,6 +28,8 @@ export default {
   data () {
     return {
       title: 'User View',
+      optionItem: '',
+      keyword: '',
       values: ['中文', 'English', '日本語', 'Français', 'Español'],
       selectLanguages: ['中文', 'English', '日本語', 'Français', 'Español'],
       countries: [
@@ -55,7 +68,7 @@ export default {
         { name: 'Central African Republic', languages: ['French', 'Sango'] },
         { name: 'Chad', languages: ['French', 'Arabic'] },
         { name: 'Chile', languages: ['Spanish'] },
-        { name: 'China', languages: ['汉语', '藏语', '维吾尔语', '蒙古语', '壮语', '苗语', '朝鲜语'] },
+        { name: 'China', languages: ['汉语', '藏语', '维吾尔语', '蒙古语', '壮语', '苗语', '朝鲜语'], isSelect: true },
         { name: 'Colombia', languages: ['Spanish'] },
         { name: 'Comoros', languages: ['Comorian', 'Arabic', 'French'] },
         { name: 'Democratic Republic of the Congo', languages: ['French'] },
@@ -199,13 +212,22 @@ export default {
         { name: '商品3' }
       ]}
   },
+  // ready () {
+  //   console.log('ready生命周期方法')
+  // },
   methods: {
     clickItem (e) {
       console.log(e.target.nodeName)
+      // 事件委托的使用
       if (e.target.nodeName === 'SPAN') {
         console.log(e.target.innerHTML.split('-')[0].trim())
         var index = e.target.innerHTML.split('-')[0].trim()
         this.selectLanguages = this.countries[index].languages
+      }
+      if (e.target.nodeName === 'OPTION') {
+        console.log(this.optionItem)
+        var idx = e.target.innerHTML.split('.')[0].trim()
+        this.selectLanguages = this.countries[idx].languages
       }
     }
   }
