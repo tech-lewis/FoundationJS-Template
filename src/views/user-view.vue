@@ -3,14 +3,22 @@
     <h1>{{title}}</h1>
     <div class="box">
       <select v-on="click:clickItem" v-model="optionItem">
-        <option v-repeat="countries" v-bind:value="isSelect">{{$index}}.{{name}}</option>
+        <option v-repeat="countries" v-model="selectItem">{{$index}}.{{name}}</option>
       </select>
+      <span>选择的国家讲的语言:</span>
+      <!-- 插值语法 -->
+      <strong>{{selectLanguages}}</strong>
       <hr>
       <span>请输入要查询的国家名称:</span>
       <input type="text" v-model="keyword" v-on="input: inputChanged">
       <strong>{{keyword}}</strong>
-      <span> speak</span>
-      <strong>{{selectLanguages.join('/')}}</strong>
+      <div class="searchResult" style="border: 3px solid #ff8800">
+        <p>查询到的国家结果</p>
+        <ol v-if="items.length">
+          <li v-repeat="items">{{name === 'Taiwan' ? 'Taiwan地区': name+'国家'}} 的人讲的语言可能是{{languages}}</li>
+        </ol>
+        <strong v-if="item.length === 0">None</strong>
+      </div>
     </div>
     <p style="text-align:center">{{selectLanguages}}</p>
     <ul class="list" style="list-style: none;">
@@ -206,16 +214,21 @@ export default {
         { name: 'Syria', languages: ['Arabic'] },
         { name: 'Taiwan', languages: ['Mandarin'] }
       ],
-      items: [
-        { name: '商品1' },
-        { name: '商品2' },
-        { name: '商品3' }
-      ]}
+      items: [],
+      selectItem: {}
+    }
   },
   // ready () {
   //   console.log('ready生命周期方法')
   // },
   methods: {
+    inputChanged (e) {
+      console.log(this.selectItem)
+      var searchItems = this.countries.filter(item => {
+        return item.name.indexOf(this.keyword) !== -1 && this.keyword.length > 4
+      })
+      this.items = searchItems
+    },
     clickItem (e) {
       console.log(e.target.nodeName)
       // 事件委托的使用
@@ -224,8 +237,8 @@ export default {
         var index = e.target.innerHTML.split('-')[0].trim()
         this.selectLanguages = this.countries[index].languages
       }
+      console.log(e.target)
       if (e.target.nodeName === 'OPTION') {
-        console.log(this.optionItem)
         var idx = e.target.innerHTML.split('.')[0].trim()
         this.selectLanguages = this.countries[idx].languages
       }
