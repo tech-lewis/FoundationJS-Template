@@ -28,14 +28,16 @@
     </ul> -->
     <hr />
     <!-- 文档区域 -->
-    <div class="reader">
-      <div class="left" style="float:left; max-width:20%;overflow:hidden;background:red">
-        <div class="link">
-          <a v-if="$index < 7" href="https://nodejs.org/docs/v0.0.{{$index}}/api.html">Node js 0.0.{{$index}} doc</a>
-          <a v-if="$index >= 10" href="https://nodejs.org/docs/v0.1.{{$index}}">Node js 0.1.{{$index}} doc</a>
+    <div class="reader" style="width:100%;background: black;height:480px">
+      <div class="left" style="float:left; max-width:20%;max-height:480px;overflow:scroll;background:gray">
+        <div class="link" style="padding: 5px 2px" v-repeat = "countries" v-on="click:changeUrl($index)">
+          <a v-if="$index < 7" href="#">Node js 0.0.{{$index}} doc</a>
+          <a v-if="$index >= 10" href="#">Node js 0.1.{{$index}} doc</a>
         </div>
       </div>
-      <div class="right">iframe</div>
+      <div class="right" style="width:90%;float:right;">
+        <iframe src="{{selectUrl}}" style="width:100%;height:480px" frameborder="0"></iframe>
+      </div>
     </div>
   </div>
 </template>
@@ -225,13 +227,22 @@ export default {
         { name: 'Taiwan', languages: ['Mandarin'] }
       ],
       items: [],
-      selectItem: {}
+      selectItem: {},
+      selectUrl: ''
     }
   },
   // ready () {
   //   console.log('ready生命周期方法')
   // },
   methods: {
+    changeUrl (index) {
+      console.log(index)
+      if (index < 7) {
+        this.selectUrl = 'https://nodejs.org/docs/v0.0.' + index + '/api.html'
+      } else {
+        this.selectUrl = 'https://nodejs.org/docs/v0.1.' + index
+      }
+    },
     inputChanged (e) {
       console.log(this.selectItem)
       var searchItems = this.countries.filter(item => {
