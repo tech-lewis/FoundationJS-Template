@@ -21,12 +21,22 @@
       </div>
     </div>
     <p style="text-align:center">{{selectLanguages}}</p>
-    <ul class="list" style="list-style: none;">
-      <li v-repeat="countries" style="padding: 0 10px;margin-bottom: 18px;hover{color: #0a6aa1};">
+    <!-- <ul class="list" style="list-style: none;" v-on="click:clickItem">
+      <li v-repeat="[countries[0]]" style="padding: 0 10px;margin-bottom: 18px;hover{color: #0a6aa1};">
         <span style="border: 1px solid #ff8800;padding: 0 10px;border-radius: 5px;text-align: center;font-family: Arial, Helvetica, sans-serif;width: 100px;" class="item">{{$index}} - {{name}}</span>
       </li>
-    </ul>
+    </ul> -->
     <hr />
+    <!-- 文档区域 -->
+    <div class="reader">
+      <div class="left" style="float:left; max-width:20%;overflow:hidden;background:red">
+        <div class="link">
+          <a v-if="$index < 7" href="https://nodejs.org/docs/v0.0.{{$index}}/api.html">Node js 0.0.{{$index}} doc</a>
+          <a v-if="$index >= 10" href="https://nodejs.org/docs/v0.1.{{$index}}">Node js 0.1.{{$index}} doc</a>
+        </div>
+      </div>
+      <div class="right">iframe</div>
+    </div>
   </div>
 </template>
 
