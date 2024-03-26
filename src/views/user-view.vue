@@ -1,37 +1,17 @@
 <template>
   <div class="container">
-    <h1>{{title}}</h1>
-    <div class="box">
-      <select v-on="click:clickItem" v-model="optionItem">
-        <option v-repeat="countries" v-model="selectItem">{{$index}}.{{name}}</option>
-      </select>
-      <span>选择的国家讲的语言:</span>
-      <!-- 插值语法 -->
-      <strong>{{selectLanguages}}</strong>
-      <hr>
-      <span>请输入要查询的国家名称:</span>
-      <input type="text" v-model="keyword" v-on="input: inputChanged">
-      <strong>{{keyword}}</strong>
-      <div class="searchResult" style="border: 3px solid #ff8800">
-        <p>查询到的国家结果</p>
-        <ol v-if="items.length">
-          <li v-repeat="items">{{name === 'Taiwan' ? 'Taiwan地区': name+'国家'}} 的人讲的语言可能是{{languages}}</li>
-        </ol>
-        <strong v-if="item.length === 0">None</strong>
-      </div>
-    </div>
-    <p style="text-align:center">{{selectLanguages}}</p>
     <!-- <ul class="list" style="list-style: none;" v-on="click:clickItem">
       <li v-repeat="[countries[0]]" style="padding: 0 10px;margin-bottom: 18px;hover{color: #0a6aa1};">
         <span style="border: 1px solid #ff8800;padding: 0 10px;border-radius: 5px;text-align: center;font-family: Arial, Helvetica, sans-serif;width: 100px;" class="item">{{$index}} - {{name}}</span>
       </li>
     </ul> -->
+    <h1>{{title}}</h1>
     <hr />
     <!-- 文档区域 -->
     <div class="reader" style="width:100%;background: black;height:480px">
       <div class="left" style="float:left; max-width:20%;max-height:480px;overflow:scroll;background:gray">
         <div class="link" style="padding: 5px 2px" v-repeat = "countries" v-on="click:changeUrl($index)">
-          <a v-if="$index < 7" href="#">Node js 0.0.{{$index}} doc</a>
+          <a v-if="$index < 7 && $index > 0" href="#">Node js 0.0.{{$index}} doc</a>
           <a v-if="$index >= 10" href="#">Node js 0.1.{{$index}} doc</a>
         </div>
       </div>
@@ -47,7 +27,7 @@ export default {
   name: 'User View',
   data () {
     return {
-      title: 'User View',
+      title: 'NewsList View',
       optionItem: '',
       keyword: '',
       values: ['中文', 'English', '日本語', 'Français', 'Español'],
@@ -234,6 +214,14 @@ export default {
   // ready () {
   //   console.log('ready生命周期方法')
   // },
+  watch: {
+    keyword: function (val, oldVal) {
+      console.log(1111111)
+    },
+    'optionItem': function (val, oldVal) {
+      console.log(val)
+    }
+  },
   methods: {
     changeUrl (index) {
       console.log(index)
