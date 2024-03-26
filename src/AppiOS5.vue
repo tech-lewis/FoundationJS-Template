@@ -43,15 +43,16 @@ export default {
 </script>
 <style scoped>
 #container {
-  height: 50px;
+  height: 400px;
 }
 .footer {
   height: 30px;
 }
 .tab-item {
-  height:moz-calc(100% - 80px);
+  /* height:moz-calc(100% - 80px);
   height:-webkit-calc(100% - 80px);
-  height:calc(40% - 1px);
+  height:calc(100% - 80px); */
+  height: 80%;
   overflow:scroll;
 }
 </style>
