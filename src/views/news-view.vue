@@ -226,6 +226,9 @@ export default {
       // 事件委托的使用
       if (e.target.nodeName === 'SELECT') {
         var selctId = e.target.value.split('.')[0].trim()
+        var selctName = e.target.value.split('.')[1].trim()
+        this.keyword = selctName
+        this.inputChanged(null)
         this.selectLanguages = this.countries[selctId].languages
       }
       if (e.target.nodeName === 'SPAN') {
