@@ -225,7 +225,7 @@ export default {
       console.log(e.target.nodeName)
       // 事件委托的使用
       if (e.target.nodeName === 'SELECT') {
-        var selctId = e.target.value.indexOf('.')[0].trim()
+        var selctId = e.target.value.split('.')[0].trim()
         this.selectLanguages = this.countries[selctId].languages
       }
       if (e.target.nodeName === 'SPAN') {
