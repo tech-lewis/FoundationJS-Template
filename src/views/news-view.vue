@@ -2,9 +2,9 @@
   <div class="container">
     <h1>{{title}}</h1>
     <div class="box">
-      <!-- <select v-on="click:clickItem" v-model="optionItem">
+      <select v-on="change:clickItem" v-model="optionItem">
         <option v-repeat="countries">{{$index}}.{{name}}</option>
-      </select> -->
+      </select>
       <span>选择的国家讲的语言:</span>
       <!-- 插值语法 -->
       <strong>{{selectLanguages}}</strong>
@@ -224,6 +224,10 @@ export default {
     clickItem (e) {
       console.log(e.target.nodeName)
       // 事件委托的使用
+      if (e.target.nodeName === 'SELECT') {
+        var selctId = e.target.value.indexOf('.')[0].trim()
+        this.selectLanguages = this.countries[selctId].languages
+      }
       if (e.target.nodeName === 'SPAN') {
         console.log(e.target.innerHTML.split('-')[0].trim())
         var index = e.target.innerHTML.split('-')[0].trim()
