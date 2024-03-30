@@ -6,7 +6,7 @@
       <button v-on="click:selectTab2">News</button>
       <button v-on="click:selectTab3">About</button>
     </div>
-    <div class="tab-item" v-show="tabIndex === 1">
+    <div class="tab-item" v-show="tabIndex === 1" style="height=80%;overflow=scroll;">
       <div v-component = 'user-view'></div>
     </div>
     <div class="tab-item" v-show="tabIndex === 2">
@@ -48,15 +48,6 @@ export default {
 }
 </script>
 <style scoped>
-#container {}
-.footer {
-  height: 30px;
-}
-.tab-item {
-  /* height:moz-calc(100% - 80px);
-  height:-webkit-calc(100% - 80px);
-  height:calc(100% - 80px); */
-  height: 80%;
-  overflow:scroll;
-}
+/* #container {} */
+/* .footer {} */
 </style>
