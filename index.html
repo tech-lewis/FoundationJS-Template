@@ -7,14 +7,11 @@
     <link rel="stylesheet" href="dist/style.css">
   </head>
   <body>
-    <div id="app">
-			{{msg}}
-		</div>
-    <script src="dist/build.js"></script>  
+    <div id="app">{{msg}}</div>
+		<script src="dist/build.js"></script>
     <script type="text/javascript" charset="utf-8">
-			const iOSVersion = navigator.appVersion // str.match(/cpu iphone os (.*?) like mac os/)
+			const iOSVersion = navigator.appVersion || ''// str.match(/cpu iphone os (.*?) like mac os/)
 			const isiOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
-			var appVersion = parseInt(iOSVersion.match(/OS (\d+)_(\d+)_?(\d+)?/)[1], 10)
 			var bindingMark = 'data-element-binding'
 			function Element (id, initData) {
 				var self = this
@@ -54,11 +51,16 @@
 					})
 				}
 			}
-			if (isiOS && appVersion < 5) {    
-    		// console.log(vueInstance)
-				var vueInstance = new Element('test', {
-					msg: 'hello!你的系统版' + appVersion + '过低，但是支持defineProperty'
-				})
+			if (isiOS) {
+				var appVersion = parseInt(iOSVersion.match(/OS (\d+)_(\d+)_?(\d+)?/)[1], 10)
+				if (appVersion < 5) {
+					// console.log(vueInstance)
+					var text = 'hello!你的系统 iOS' + appVersion + '版本过低，但是支持defineProperty'
+					var vueInstance = new Element('app', {
+						msg: text
+					})
+
+				}
 			}
       if (/Atom/.test(window.navigator.userAgent)) {
         console.log('Welcome to Electron')

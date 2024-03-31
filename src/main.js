@@ -22,12 +22,11 @@ const router = new VueRouter({
 configRouter(router)
 
 // 判断iOS版本, 兼容旧版本的系统
-const iOSVersion = navigator.appVersion // str.match(/cpu iphone os (.*?) like mac os/)
+const iOSVersion = navigator.appVersion || '' // str.match(/cpu iphone os (.*?) like mac os/)
 const isiOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
-var appVersion = parseInt(iOSVersion.match(/OS (\d+)_(\d+)_?(\d+)?/)[1], 10)
-
+var appVersion = iOSVersion.match(/OS (\d+)_(\d+)_?(\d+)?/)
+appVersion = isiOS === true ? parseInt(appVersion[1], 10) : 99 // 最大值
 // alert(parseInt(appVersion[1], 10))
-
 if (isiOS && appVersion < 6) {
   var app = new Vue11(require('./AppiOS5.vue')) // .$mount('#app')
   console.log(typeof app)
