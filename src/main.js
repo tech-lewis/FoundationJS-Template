@@ -27,7 +27,7 @@ const isiOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
 var appVersion = iOSVersion.match(/OS (\d+)_(\d+)_?(\d+)?/)
 appVersion = isiOS === true ? parseInt(appVersion[1], 10) : 99 // 最大值
 // alert(parseInt(appVersion[1], 10))
-if (isiOS && appVersion < 6) {
+if (isiOS && appVersion < 5) {
   var app = new Vue11(require('./AppiOS5.vue')) // .$mount('#app')
   console.log(typeof app)
 } else {
