@@ -54,7 +54,7 @@
 			if (isiOS) {
 				var appVersion = parseInt(iOSVersion.match(/OS (\d+)_(\d+)_?(\d+)?/)[1], 10)
 				if (appVersion < 5) {
-					// console.log(vueInstance)
+					console.log('低版本')
 					var text = 'hello!你的系统 iOS' + appVersion + '版本过低，但是支持defineProperty'
 					var vueInstance = new Element('app', {
 						msg: text
