@@ -4,13 +4,13 @@
     <hr />
     <!-- 文档区域 -->
     <div class="reader" style="width:100%;background: black;height:480px">
-      <div class="left" style="float:left; max-width:20%;max-height:480px;overflow:scroll;background:gray">
-        <div class="link" style="padding: 5px 2px" v-for = "(number, index) of 106" :key="number" @click="changeUrl(index)">
+      <div class="left" style="float:left; max-width:19%;max-height:480px;overflow:scroll;background:gray">
+        <div class="link" style="padding: 5px 2px" v-for = "(number, index) of 105" :key="number" @click="changeUrl(index)">
           <a v-if="index < 7 && index > 0" href="#">Node js 0.0.{{index}} doc</a>
           <a v-if="index >= 10" href="#">Node js 0.1.{{index}} doc</a>
         </div>
       </div>
-      <div class="right" style="width:90%;float:right;">
+      <div class="right" style="width:89%;float:right;">
         <div v-if="selectUrl === ''" style="text-align:center;color:white;">
           <span style="color:yellow;">Click left menu to load webview</span>
         </div>

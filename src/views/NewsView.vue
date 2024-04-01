@@ -2,15 +2,15 @@
   <div class="container">
     <!-- <h1>{{title}}</h1> -->
     <div class="box">
-      <select @change="clickItem" v-model="optionItem">
-        <option v-for="(item, index) in countries" :key="index">{{index}}.{{item.name}}</option>
+      <select @change="clickItem" v-model="optionItem" id="selectRef">
+        <option v-for="(item, index) in countries" :key="index" :value="index">{{index}}.{{item.name}}</option>
       </select>
       <span>选择的国家讲的语言:</span>
       <!-- 插值语法 -->
       <strong>{{selectLanguages}}</strong>
       <hr>
-      <span>请输入要查询的国家名称:</span>
-      <input type="text" v-model="keyword" @change="inputChanged">
+      <span>请输入要查询的{{keyword === 'Taiwan' ? '地区': '国家'}}名称:</span>
+      <input type="text" v-model="keyword" @input="inputChanged">
       <strong>{{keyword}}</strong>
       <div class="searchResult" style="border: 3px solid #ff8800">
         <p>查询到的国家结果</p>
@@ -220,43 +220,50 @@ export default Vue.extend({
       selectUrl: ''
     }
   },
+  created () {
+    // document.getElementById('selectRef').value = '33'
+    this.optionItem = '33' // 默认China
+  },
   // ready () {
   //   console.log('ready生命周期方法')
   // },
-  methods: {
-    changeUrl (index) {
-      console.log(index)
-      if (index < 7) {
-        this.selectUrl = 'https://nodejs.org/docs/v0.0.' + index + '/api.html'
-      } else {
-        this.selectUrl = 'https://nodejs.org/docs/v0.1.' + index
-      }
-    },
-    inputChanged (e) {
-      console.log(this.selectItem)
+  watch: {
+    keyword (newValue, old) {
+      console.log(old + ',' + newValue)
       var searchItems = this.countries.filter(item => {
         return item.name.indexOf(this.keyword) !== -1 && this.keyword.length > 4
       })
       this.items = searchItems
+    }
+  },
+  methods: {
+    inputChanged (e) {
+      // console.log(this.keyword)
+      // var searchItems = this.countries.filter(item => {
+      //   return item.name.indexOf(this.keyword) !== -1 && this.keyword.length > 4
+      // })
+      // this.items = searchItems
     },
     clickItem (e) {
       console.log(e.target.nodeName)
       // 事件委托的使用
       if (e.target.nodeName === 'SELECT') {
         var selctId = e.target.value.split('.')[0]
-        var selctName = e.target.value.split('.')[1]
-        this.keyword = selctName
-        this.inputChanged(null)
+        this.keyword = this.countries[selctId].name
         this.selectLanguages = this.countries[selctId].languages
+        var searchItems = this.countries.filter(item => {
+          return item.name.indexOf(this.keyword) !== -1 && this.keyword.length > 4
+        })
+        this.items = searchItems
       }
       if (e.target.nodeName === 'SPAN') {
-        console.log(e.target.innerHTML.split('-')[0])
+        // console.log(e.target.innerHTML.split('-')[0].trim())
         var index = e.target.innerHTML.split('-')[0]
         this.selectLanguages = this.countries[index].languages
       }
       console.log(e.target)
       if (e.target.nodeName === 'OPTION') {
-        var idx = e.target.innerHTML.split('.')[0]
+        var idx = e.target.innerHTML.split('.')[0].trim()
         this.selectLanguages = this.countries[idx].languages
       }
     }
