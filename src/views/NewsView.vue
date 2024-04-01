@@ -243,20 +243,20 @@ export default Vue.extend({
       console.log(e.target.nodeName)
       // 事件委托的使用
       if (e.target.nodeName === 'SELECT') {
-        var selctId = e.target.value.split('.')[0].trim()
-        var selctName = e.target.value.split('.')[1].trim()
+        var selctId = e.target.value.split('.')[0]
+        var selctName = e.target.value.split('.')[1]
         this.keyword = selctName
         this.inputChanged(null)
         this.selectLanguages = this.countries[selctId].languages
       }
       if (e.target.nodeName === 'SPAN') {
-        console.log(e.target.innerHTML.split('-')[0].trim())
-        var index = e.target.innerHTML.split('-')[0].trim()
+        console.log(e.target.innerHTML.split('-')[0])
+        var index = e.target.innerHTML.split('-')[0]
         this.selectLanguages = this.countries[index].languages
       }
       console.log(e.target)
       if (e.target.nodeName === 'OPTION') {
-        var idx = e.target.innerHTML.split('.')[0].trim()
+        var idx = e.target.innerHTML.split('.')[0]
         this.selectLanguages = this.countries[idx].languages
       }
     }
