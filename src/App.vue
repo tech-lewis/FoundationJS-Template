@@ -1,60 +1,57 @@
 <template>
-  <div id="app" style="background:black;">
+  <div id='container'>
     <div class="logo" @click="changeStyle" style="height: 100%;background: gray;"><img style="width: 50px;height:50px;margin: 0 auto;" src="./assets/logo.png"></div>
-    <div :class="{basic: authenticating}">
-      <!-- :class = '{name: boolValue}'动态绑定样式适用 样式名确定好个数确定好，动态决定用不用的场景 -->
-      <!-- :class=‘random’的名字写法 可用在样式类名不确定 需要动态绑定的场景 -->
-      <!-- s数组的写法 个数不确定，名字不确定都不确定的场景 -->
-
-      <!-- style内联样式的绑定的 Vue对象写法 VUE要求小驼峰写出来-->
-      <!-- 还有一种:style=[arr] 写法使用的少 -->
-      <h1 :style="basic">点击图标切换样式</h1>
-      <!-- 这种写法的使用比数组的写法更多， 对象数组就不太常用的写法 -->
-      <!-- <template  v-show="isShow"> 不能这么写的 性能更好但是会修改层级 -->
-      <template>
-        <p style="color: white;" :style="{
-          fontSize : mySize
-        }">当前文字颜色值: {{basic}}</p>
-      </template>
+    <h1>This is app component</h1>
+    <div class="header" style="padding: 20px;">
+      <button @click="selectTab1">Node Docs</button>
+      <button @click="selectTab2">News</button>
+      <button @click="selectTab3">About</button>
+    </div>
+    <div class="tab-item" v-show="tabIndex === 1" style="height=80%;overflow=scroll;">
+      <news-view></news-view>
+    </div>
+    <div class="tab-item" v-show="tabIndex === 2">
+      <documents-view></documents-view>
+    </div>
+    <div class="tab-item" v-show="tabIndex === 3">
     </div>
   </div>
 </template>
 
 <script>
+// import Router from './router/vue-router.min.js'
+import NewsView from './views/NewsView'
+import DocumentsView from './views/DocumentsView'
+import SettingView from './views/NewsView'
+
 export default {
-  components: {},
+  name: 'AppComponent',
   data () {
     return {
-      basic: {
-        color: 'red',
-        isShow: false,
-        backgroundColor: 'black', // 需要JS存在的样式，而且多个单词需要驼峰命名写出来
-        backgeoundColor: 'black' // 需要JS存在的样式，而且多个单词需要驼峰命名写出来 这个是无效的
-      },
-      mySize: '10px', // 需要完整的值
-      authenticating: false
+      tabIndex: 3 // 默认显示user view
     }
   },
-  created () {
-    console.log('app init')
+  components: {
+    NewsView,
+    SettingView,
+    DocumentsView
   },
   methods: {
-    getRandomColor () {
-      let color = '#'
-      const hexValues = '0123456789ABCDEF'
-      for (let i = 0; i < 6; i++) {
-        color += hexValues[Math.floor(Math.random() * 16)]
-      }
-      return color
+    changeStyle () {},
+    selectTab3 () {
+      this.tabIndex = 3
     },
-    changeStyle () {
-      this.isShow = !this.isShow
-      this.basic.color = this.getRandomColor()
-      this.basic.backgroundColor = this.getRandomColor()
+    selectTab2 () {
+      this.tabIndex = 2
+    },
+    selectTab1 (event) {
+      console.log(event)
+      this.tabIndex = 1
     }
   }
 }
 </script>
-
-<style>
+<style scoped>
+/* #container {} */
+/* .footer {} */
 </style>

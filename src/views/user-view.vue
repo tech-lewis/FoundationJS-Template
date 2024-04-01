@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: 'User View',
+  name: 'user-view',
   data () {
     return {
       title: 'NewsList View',

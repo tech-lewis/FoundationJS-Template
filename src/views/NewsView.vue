@@ -1,23 +1,23 @@
 <template>
   <div class="container">
-    <h1>{{title}}</h1>
+    <!-- <h1>{{title}}</h1> -->
     <div class="box">
-      <select v-on="change:clickItem" v-model="optionItem">
-        <option v-repeat="countries">{{$index}}.{{name}}</option>
+      <select @change="clickItem" v-model="optionItem">
+        <option v-for="(item, index) in countries" :key="index">{{index}}.{{item.name}}</option>
       </select>
       <span>选择的国家讲的语言:</span>
       <!-- 插值语法 -->
       <strong>{{selectLanguages}}</strong>
       <hr>
       <span>请输入要查询的国家名称:</span>
-      <input type="text" v-model="keyword" v-on="input: inputChanged">
+      <input type="text" v-model="keyword" @change="inputChanged">
       <strong>{{keyword}}</strong>
       <div class="searchResult" style="border: 3px solid #ff8800">
         <p>查询到的国家结果</p>
         <ol v-if="items.length">
-          <li v-repeat="items">{{name === 'Taiwan' ? 'Taiwan地区': name+'国家'}} 的人讲的语言可能是{{languages}}</li>
+          <li v-for="item in items" :key="item">{{item.name === 'Taiwan' ? 'Taiwan地区': item.name+'国家'}} 的人讲的语言可能是{{item.languages}}</li>
         </ol>
-        <strong v-if="item.length === 0">None</strong>
+        <strong v-if="items.length === 0">None</strong>
       </div>
     </div>
     <p style="text-align:center">{{selectLanguages}}</p>
@@ -27,27 +27,13 @@
       </li>
     </ul> -->
     <hr />
-    <!-- 文档区域 -->
-    <div class="reader" style="width:100%;background: black;height:480px">
-      <div class="left" style="float:left; max-width:20%;max-height:480px;overflow:scroll;background:gray">
-        <div class="link" style="padding: 5px 2px" v-repeat = "countries" v-on="click:changeUrl($index)">
-          <a v-if="$index < 7 && $index > 0" href="#">Node js 0.0.{{$index}} doc</a>
-          <a v-if="$index >= 10" href="#">Node js 0.1.{{$index}} doc</a>
-        </div>
-      </div>
-      <div class="right" style="width:90%;float:right;">
-        <div v-if="selectUrl === ''" style="text-align:center;color:white;">
-          <span style="color:yellow;">Click left menu to load webview</span>
-        </div>
-        <iframe src="{{selectUrl}}" style="width:100%;height:480px" frameborder="0"></iframe>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'new-view',
+import Vue from '../vue2'
+export default Vue.extend({
+  name: 'news-view',
   data () {
     return {
       title: 'Search country view',
@@ -275,7 +261,7 @@ export default {
       }
     }
   }
-}
+})
 </script>
 
 <style>
