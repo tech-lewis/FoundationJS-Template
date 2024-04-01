@@ -8,10 +8,10 @@
 
       <!-- style内联样式的绑定的 Vue对象写法 VUE要求小驼峰写出来-->
       <!-- 还有一种:style=[arr] 写法使用的少 -->
-      <span :style="basic">点击图标切换样式</span>
+      <h1 :style="basic">点击图标切换样式</h1>
       <!-- 这种写法的使用比数组的写法更多， 对象数组就不太常用的写法 -->
       <!-- <template  v-show="isShow"> 不能这么写的 性能更好但是会修改层级 -->
-      <template v-if="isShow">
+      <template>
         <p style="color: white;" :style="{
           fontSize : mySize
         }">当前文字颜色值: {{basic}}</p>
@@ -34,6 +34,9 @@ export default {
       mySize: '10px', // 需要完整的值
       authenticating: false
     }
+  },
+  created () {
+    console.log('app init')
   },
   methods: {
     getRandomColor () {
