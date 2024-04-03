@@ -4,9 +4,9 @@ import VueRouter from 'vue-router'
 import {configRouter} from './route-config'
 // import router from './router'
 // import * as echarts from 'echarts'
-// import ElementUI from 'element-ui' // 全局引入
+import ElementUI from 'element-ui' // 全局引入
 // import 'element-ui/lib/theme-default/index.css'
-// Vue.use(ElementUI)
+Vue.use(ElementUI)
 /* eslint-disable no-new */
 import { Button } from 'vux'
 // import 'styles/base.css'

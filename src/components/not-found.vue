@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <img src="../assets/logo.png" alt="">
-    <p>404 默认页面</p>
+    <hr>
+    <el-button>404 默认页面</el-button>
   </div>
 </template>
 
