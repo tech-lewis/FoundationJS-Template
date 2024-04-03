@@ -445,5 +445,6 @@ body {
 .app__menu__item {
   padding-left: 20px;
   border-left: 3px solid #ff8800;
+  list-style: none;
 }
 </style>
