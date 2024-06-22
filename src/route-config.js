@@ -1,87 +1,36 @@
-export function configRouter (router) {
-  // normal routes
-  router.map({
-    // basic example
-    '/about': {
-      // the component can also be a plain string component id,
-      // but a component with that id must be available in the
-      // App component's scope.
-      component: require('./components/about')
-    },
-    '/welcome': {
-      // the component can also be a plain string component id,
-      // but a component with that id must be available in the
-      // App component's scope.
-      component: require('./components/Hello')
-    },
-    // nested example
-    '/user/:userId': {
-      component: require('./components/user/index.vue'),
-      subRoutes: {
-        // matches "/user/:userId/profile/:something"
-        'profile/:something': {
-          component: require('./components/user/profile.vue')
-        },
-        // matches "/user/:userId/posts"
-        'posts': {
-          component: require('./components/user/posts.vue')
-        },
-        // matches "/user/:userId/settings"
-        'settings': {
-          component: require('./components/user/settings.vue')
-        }
-      }
-    },
+import navConfig from './nav.config.json'
 
-    // not found handler
+const registerRoute = (config) => {
+  let route = {}
+  config.map(nav => nav.list.map(page => {
+    try {
+      route[page.path] = {
+        component: require(`./docs${page.path}.md`),
+        title: page.title || page.name,
+        description: page.description
+      }
+    } catch (e) {
+      console.error(e)
+      page.disabled = true
+    }
+  }))
+
+  return { route, navs: config }
+}
+
+const route = registerRoute(navConfig)
+
+export const navs = route.navs
+export default function configRouter (router) {
+  router.map(Object.assign({
     '*': {
-      component: require('./components/not-found.vue')
-    },
-
-    // advanced example
-    '/inbox': {
-      component: require('./components/inbox/index.vue'),
-      subRoutes: {
-        '/message/:messageId': {
-          component: require('./components/inbox/message.vue')
-        },
-        '/archived': {
-          component: require('./components/inbox/archive.vue')
-        },
-        // default component to render into the nested outlet
-        // when the parent route is matched but there's no
-        // nested segment. In this case, "/inbox".
-        '/': {
-          // inline component
-          component: {
-            template: 'default yo'
-          }
-        }
-      }
+      component: require('./docs/home.md')
     }
-  })
+  }, route.route))
 
-  // redirect
-  router.redirect({
-    '/info': '/about',
-    '/hello/:userId': '/user/:userId'
-  })
-
-  // global before
-  // 3 options:
-  // 1. return a boolean
-  // 2. return a Promise that resolves to a boolean
-  // 3. call transition.next() or transition.abort()
-  router.beforeEach((transition) => {
-    if (transition.to.path === '/forbidden') {
-      router.app.authenticating = true
-      setTimeout(() => {
-        router.app.authenticating = false
-        alert('this route is forbidden by a global before hook')
-        transition.abort()
-      }, 3000)
-    } else {
-      transition.next()
-    }
+  router.beforeEach(transition => {
+    document.title = transition.to.title || document.title
+    transition.to.router.app.$broadcast('element.example.reload')
+    transition.next()
   })
 }
