@@ -1,5 +1,9 @@
 <template>
-  <div>Hello</div>
+  <div>
+    <header>
+      <h1 class="title">Welcome to My Blog</h1>
+    </header>
+  </div>
 </template>
 
 <script>
