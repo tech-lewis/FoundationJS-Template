@@ -1,86 +1,34 @@
 <template>
   <div id="app">
-    <!-- <div class="logo"><img src="./assets/logo.png"></div> -->
-    <p v-show="authenticating" style="color:red">Authenticating...</p>
-    <h1 class="header">Header</h1>
-    <div class="footer">
-      <a v-link="{ path: '/welcome' }">主页</a>
-      <a v-link="{ path: '/user/Hello/profile/Mark' }">user</a>
-      <a v-link="{ path: '/about' }">about</a>
-      <a v-link="{ path: '/forbidden' }">forbidden</a>
-    </div>
-    <router-view class="view" transition="test" transition-mode="out-in" keep-alive></router-view>
+    <img class="logo" src="./assets/logo.png">
+    <hello></hello>
+    <!-- <el-button>test</el-button> -->
+    <el-button type="primary">primary</el-button>
   </div>
 </template>
 
 <script>
-// import Hello from './components/Hello'
+import Hello from './components/Hello'
 export default {
   components: {
-    // Hello
-  },
-  data () {
-    return {
-      authenticating: false
-    }
+    Hello
   }
 }
 </script>
 
 <style>
-body {
+#app {
   font-family: Helvetica, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex-direction: column;
   background: #ccc;
 }
-.header {
-  background: gray;
-  color: white;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-}
-.view {
-  transition: all .5s ease;
-}
-.test-enter, .test-leave {
-  opacity: 0;
-  transform: translate3d(10px, 0, 0);
-}
-.v-link {
-  padding: 10px;
-  background: white;
-}
-.v-link-active {
-  color: white;
-  background: orange;
-  box-sizing: border-box;
-  padding: 10px;
-}
-[v-cloak] {
-  display: none;
-}
 
-#app {
-  display: flex;
-  justify-self: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.logo {
-  text-align: center;
-}
-
-.footer {
-  text-align: center;
-  margin: 0 auto;
-  padding-top: 10px;
-  border-bottom: 1px solid orange;
-}
-.footer>a{
-  display: inline;
-  padding: 5px;
-  line-height: 20px;
-  text-decoration: none;
+body {
+  margin: 0;
+  padding: 0;
 }
 </style>
