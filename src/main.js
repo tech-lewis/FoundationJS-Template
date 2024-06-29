@@ -10,10 +10,10 @@ import ElementUI from 'element-ui' // 全局引入
 // import 'element-ui/lib/theme-default/index.css'
 Vue.use(ElementUI)
 /* eslint-disable no-new */
-import { Button } from 'vux'
+// import { Button } from 'vux'
 // import 'styles/base.css'
 // import 'styles/index.css'
-Vue.component('v-button', Button)
+// Vue.component('v-button', Button)
 // install router
 Vue.use(VueRouter)
 // create router
