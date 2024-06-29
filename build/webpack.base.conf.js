@@ -2,6 +2,9 @@ var path = require('path')
 
 module.exports = {
   entry: './src/main.js',
+  externals: {
+    "echarts": "echarts"
+  },
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/dist/',
@@ -19,6 +22,10 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue'
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
       },
       {
         test: /\.js$/,
