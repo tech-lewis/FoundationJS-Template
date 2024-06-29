@@ -33,13 +33,5 @@
   </script>
   
   <style scoped>
-  .container {
-    cursor: pointer;
-  }
-  
-  .red {
-    background: #ff0101;
-    user-select: none;
-  }
   </style>
   
