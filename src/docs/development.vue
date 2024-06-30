@@ -37,10 +37,14 @@
         vue事件修饰符常用的
       </pre>
     </section>
+    <!-- <el-button type="primary">primary</el-button> -->
   </div>
 </template>
 
 <script>
+import vue from 'vue'
+// import { Button } from 'element-ui'
+// vue.component('el-button', Button)
 export default {
 
 }

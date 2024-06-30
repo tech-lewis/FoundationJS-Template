@@ -41,17 +41,17 @@
       <toc main=".app__main"></toc>
     </div>
   </div>
-
-  <button class="hljs__button" v-el:button></button>
+  
+  <button class="hljs__button" v-el:button>测试el-button</button>
   </div>
 </template>
 
 <script>
   // import { navs } from './nav-config'
-  import toc from './components/Toc'
   // import E from 'oui-dom-events'
+  import toc from './components/Toc'
   import { toggleClass, addClass, removeClass } from './dom/class'
-
+  
   export default {
     name: 'app',
     components: {
