@@ -1,9 +1,4 @@
 {
   "presets": ["es2015", "stage-2"],
-  "plugins": ["transform-runtime", ["component", 
-    {
-      "libraryName": "element-ui",
-      "style": true
-    }
-  ]]  
+  "plugins": ["transform-runtime"]
 }
