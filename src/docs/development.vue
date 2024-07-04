@@ -2,6 +2,11 @@
   <div>
     <hr>
     <header><h1>development tips</h1></header>
+    <group @click="getDetail">
+      <div v-for="item in tips" :key="item.id" v-bind:class="item.id">
+        <cell @click.stop="" v-bind:title="item.name" value="点击查看更多知识点" v-on:click="getDetail(item)"></cell>
+      </div>
+    </group>
     <section>
       <span>Vue 常用的指令</span>
       <ul>
@@ -38,25 +43,34 @@
       </pre>
     </section>
     <!-- <el-button type="primary">primary</el-button> -->
-    <x-group>
-      <x-cell title="vue" value="cool"></x-cell>
-    </x-group>
   </div>
 </template>
 
 <script>
-import XGroup from 'vux/components/group/'
-import XCell from 'vux/components/cell/'
-// import vue from 'vue'
-// import { Button } from 'element-ui'
-// vue.component('el-button', Button)
+import { Group, Cell } from 'vux'
 export default {
   components: {
-    XGroup,
-    XCell
+    Group,
+    Cell
+  },
+  data () {
+    return {
+      selectedLanguages: [],
+      tips: [
+        { id: 0, name: '计算属性和watch的区别和使用', languages: ['watch更全能', '计算属性只能返回 但是watch可以处理async异步任务', 'vue管理的函数不能用箭头函数:', '', ''] },
+        { id: 1, name: '计算属性和watch的区别和使用', languages: ['watch更全能', '计算属性只能返回 但是watch可以处理async异步任务', 'vue管理的函数不能用箭头函数:', '', ''] },
+        { id: 2, name: '计算属性和watch的区别和使用', languages: ['watch更全能', '计算属性只能返回 但是watch可以处理async异步任务', 'vue管理的函数不能用箭头函数:', '', ''] }
+      ]
+    }
   },
   created () {
     console.log('Hello develop')
+  },
+  methods: {
+    getDetail (e) {
+      alert('Hello', e.target.nodeName)
+      console.log(e.target)
+    }
   }
 }
 </script>
