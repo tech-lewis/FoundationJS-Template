@@ -221,6 +221,7 @@
 </script>
 
 <style lang="css">
+@import '~vux/vux.css';
 /* @import 'assets/styles/common.css'; */
 html, body {
   margin: 0;
