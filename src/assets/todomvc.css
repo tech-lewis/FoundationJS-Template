@@ -1,91 +1,3 @@
-<template>
-  <div>
-    <header>
-      <h1 class="title">Welcome to Pure.Navigator admin</h1>
-      <dev-tip>
-        备忘录小程序开发中
-      </dev-tip>
-    </header>
-    <section id="todoapp" sd-controller="Todos" sd-class="filter">
-
-      <header id="header">
-        <h1>todos</h1>
-        <!-- main input box -->
-        <input id="new-todo" autofocus sd-on="keyup:addTodo | key enter" placeholder="What needs to be done?">
-      </header>
-
-      <section id="main" sd-show="total < todos">
-        <input id="toggle-all" type="checkbox" sd-checked="allDone" sd-on="change:toggleAll">
-        <ul id="todo-list">
-          <!-- a single todo item -->
-          <li sd-each="todo:todos" sd-class="completed:todo.done, editing:todo.editing">
-            <div class="view">
-              <input class="toggle" type="checkbox" sd-checked="todo.done" sd-on="change:updateCount">
-              <label sd-text="todo.text" sd-on="dblclick:edit"></label>
-              <button class="destroy" sd-on="click:removeTodo"></button>
-            </div>
-            <input class="edit" type="text" sd-focus="todo.editing" sd-on="blur:stopEdit, keyup:stopEdit | key enter"
-              sd-value="todo.text">
-          </li>
-        </ul>
-      </section>
-
-      <!-- footer controls -->
-      <footer id="footer" sd-show="total < todos">
-        <span id="todo-count">
-          <strong sd-text="remaining"></strong>
-          <span sd-text="itemLabel < remaining"></span>
-          left
-        </span>
-        <ul id="filters">
-          <li><a href="#/all" data-filter="all" sd-on="click:setFilter">All</a></li>
-          <li><a href="#/active" data-filter="active" sd-on="click:setFilter">Active</a></li>
-          <li><a href="#/completed" data-filter="completed" sd-on="click:setFilter">Completed</a></li>
-        </ul>
-        <button id="clear-completed" sd-on="click:removeCompleted">
-          Remove Completed (<span sd-text="completed < total remaining"></span>)
-        </button>
-      </footer>
-
-    </section>
-
-    <!-- info -->
-    <footer id="info">
-      <p>Double-click to edit a todo</p>
-      <p>Powered by <a href="https://github.com/yyx990803/seed">Seed.js</a></p>
-      <p>Created by <a href="http://evanyou.me">作者 刘竞</a></p>
-    </footer>
-  </div>
-</template>
-
-<script>
-import DevTip from '../components/UIKit/Dev-tip'
-export default {
-  name: 'Home',
-  data () {
-    return {}
-  },
-  components: {
-    DevTip
-  }
-}
-</script>
-
-<style>
-#todoapp.all [data-filter="all"],
-#todoapp.active [data-filter="active"],
-#todoapp.completed [data-filter="completed"] {
-    font-weight: bold;
-}
-
-#todoapp.active #todo-list li.completed {
-    display: none;
-}
-
-#todoapp.completed #todo-list li:not(.completed) {
-    display: none;
-}
-
 html,
 body {
 	margin: 0;
@@ -111,7 +23,7 @@ button {
 body {
 	font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	line-height: 1.4em;
-	background: #eaeaea url('../assets/bg.png');
+	background: #eaeaea url('bg.png');
 	color: #4d4d4d;
 	width: 550px;
 	margin: 0 auto;
@@ -500,4 +412,3 @@ label[for='toggle-all'] {
 .hidden{
 	display:none;
 }
-</style>

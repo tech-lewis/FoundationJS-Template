@@ -4,6 +4,7 @@
     <div class="pure-u-1-6 app__sidebar pure-menu pure-menu-scrollable app__menu">
       <a class="pure-menu-heading app__brand" v-link="'/'">
         <span class="app__eleme">Vue</span>admin
+        <dev-tip>开发中</dev-tip>
       </a>
 
       <div v-for="nav in navs" :key="nav" class="section">
@@ -32,7 +33,7 @@
     </div>
     <div class="pure-u-5-6 app__content">
       <header class="app__header">
-        <h1 class="app__headline">{{ $route.title || 'element 后台组件' }}</h1>
+        <h1 class="app__headline">{{ $route.title || 'FoundationJS 后台组件' }}</h1>
       </header>
       <section class="app__main" v-el:main>
         <p class="app__description">{{ $route.description }}</p>
@@ -50,12 +51,14 @@
   // import { navs } from './nav-config'
   // import E from 'oui-dom-events'
   import toc from './components/Toc'
+  import DevTip from './components/UIKit/Dev-tip'
   import { toggleClass, addClass, removeClass } from './dom/class'
   
   export default {
     name: 'app',
     components: {
-      toc
+      toc,
+      DevTip
     },
     data () {
       return {
@@ -233,6 +236,8 @@ body {
 }
 .app__sidebar {
   width: 230px;
+  color: #324157;
+  background-color: #fff
 }
 .app__content {
   margin-left: 230px;
@@ -249,6 +254,7 @@ body {
   position: fixed;
   top: 0;
   z-index: 10;
+  line-height: 50px;
   background-color: #f8f8f9;
   color: #20293b;
 }
@@ -414,7 +420,7 @@ body {
   margin-bottom: 2px;
   margin-top: 0;
   transform: rotate(-135deg);
-  border-left: 1px solid #ccc;
+  border-left: 1px solid #fff;
   border-top: 1px solid #ccc;
   content: "";
   display: inline-block;
