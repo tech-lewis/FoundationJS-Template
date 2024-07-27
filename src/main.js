@@ -1,3 +1,8 @@
+Object.defineProperty(module.exports, '__esModule', {
+  value: true,
+  writable: true,
+  configurable: true
+})
 import Vue from 'vue'
 import navConfig from './nav.config.json'
 
@@ -6,8 +11,6 @@ import VueRouter from 'vue-router'
 // import {configRouter} from './route-config'
 // import router from './router'
 // import * as echarts from 'echarts'
-import ElementUI from 'element-ui' // 全局引入
-Vue.use(ElementUI)
 /* eslint-disable no-new */
 // import { Button } from 'vux'
 // import 'styles/index.css'
