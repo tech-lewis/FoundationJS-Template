@@ -256,6 +256,7 @@ body {
   position: fixed;
   top: 0;
   z-index: 10;
+  line-height: 50px;
   background-color: #f8f8f9;
   color: #20293b;
 }
