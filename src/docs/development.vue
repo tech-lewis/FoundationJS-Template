@@ -7,10 +7,6 @@
         <cell @click.stop="" v-bind:title="item.name" value="点击查看更多知识点" v-on:click="getDetail(item)"></cell>
       </div>
     </group>
-    <group>
-      <cell title="微信设置页面" :is_link=true link="demos"></cell>
-      <cell title="小蚁摄像设置" :is_link=true link="demo/yi"></cell>
-    </group>
     <section>
       <span>Vue 常用的指令</span>
       <ul>
@@ -51,8 +47,7 @@
 </template>
 
 <script>
-const Group = require('vux/components/group/')
-const Cell = require('vux/components/cell/')
+import { Group, Cell } from 'vux'
 export default {
   components: {
     Group,
