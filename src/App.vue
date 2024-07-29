@@ -4,7 +4,6 @@
     <div class="pure-u-1-6 app__sidebar pure-menu pure-menu-scrollable app__menu">
       <a class="pure-menu-heading app__brand" v-link="'/'">
         <span class="app__eleme">Vue</span>admin
-        <dev-tip>开发中</dev-tip>
       </a>
 
       <div v-for="nav in navs" :key="nav" class="section">
@@ -33,7 +32,7 @@
     </div>
     <div class="pure-u-5-6 app__content">
       <header class="app__header">
-        <h1 class="app__headline">{{ $route.title || 'FoundationJS 后台组件' }}</h1>
+        <h1 class="app__headline">{{ $route.title || 'element 后台组件' }}</h1>
       </header>
       <section class="app__main" v-el:main>
         <p class="app__description">{{ $route.description }}</p>
@@ -42,23 +41,24 @@
       <toc main=".app__main"></toc>
     </div>
   </div>
-  
-  <button class="hljs__button" v-el:button>测试el-button</button>
+  <el-button type="primary" @click="showAddressInput">测试el-button</el-button>
   </div>
 </template>
 
 <script>
   // import { navs } from './nav-config'
   // import E from 'oui-dom-events'
+
+  import Vue from 'vue'
+  import { Button } from 'element-ui'
   import toc from './components/Toc'
-  import DevTip from './components/UIKit/Dev-tip'
   import { toggleClass, addClass, removeClass } from './dom/class'
   
+  Vue.component('el-button', Button)
   export default {
     name: 'app',
     components: {
-      toc,
-      DevTip
+      toc
     },
     data () {
       return {
@@ -178,6 +178,10 @@
     methods: {
       findAllHighlight () {
         return Array.prototype.slice.call(document.querySelectorAll('.hljs'))
+      },
+      showAddressInput () {
+        var address = window.prompt('Hi!', '请输入您的想跳转的网页地址')
+        window.location.href = address
       }
     },
     // created () {
@@ -236,8 +240,6 @@ body {
 }
 .app__sidebar {
   width: 230px;
-  color: #324157;
-  background-color: #fff
 }
 .app__content {
   margin-left: 230px;
@@ -254,7 +256,6 @@ body {
   position: fixed;
   top: 0;
   z-index: 10;
-  line-height: 50px;
   background-color: #f8f8f9;
   color: #20293b;
 }
@@ -420,7 +421,7 @@ body {
   margin-bottom: 2px;
   margin-top: 0;
   transform: rotate(-135deg);
-  border-left: 1px solid #fff;
+  border-left: 1px solid #ccc;
   border-top: 1px solid #ccc;
   content: "";
   display: inline-block;
@@ -453,5 +454,19 @@ body {
   padding-left: 20px;
   border-left: 3px solid #ff8800;
   list-style: none;
+}
+
+body {
+	font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	line-height: 1.4em;
+	background: #eaeaea url('./assets/logo.png');
+	color: #4d4d4d;
+	width: 550px;
+	margin: 0 auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: antialiased;
+	-ms-font-smoothing: antialiased;
+	-o-font-smoothing: antialiased;
+	font-smoothing: antialiased;
 }
 </style>
