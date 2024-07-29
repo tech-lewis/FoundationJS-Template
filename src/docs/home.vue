@@ -1,9 +1,5 @@
 <template>
-  <div>
-    <header>
-      <h1 class="title">Welcome to My Blog</h1>
-      <dev-tip> 开发中 </dev-tip>
-    </header>
+  <div class="home-wrapper">
     <section id="todoapp" sd-controller="Todos" sd-class="filter">
       <header id="header">
         <h1>todos</h1>
@@ -56,8 +52,6 @@
       <p>Powered by <a href="https://github.com/yyx990803/seed">Seed.js</a></p>
       <p>Created by <a href="http://evanyou.me">刘竞</a></p>
     </footer>
-    <video style="width:400px; height:300px" src="dist/test.mp4" controls></video>
-    <audio controls src="dist/haha.m4a"></audio>
   </div>
 </template>
 
@@ -65,7 +59,7 @@
 import DevTip from '../components/UIKit/Dev-tip'
 export default {
   name: 'Home',
-  data() {
+  data () {
     return {
       keyword: ''
     }
@@ -74,7 +68,7 @@ export default {
     DevTip
   },
   methods: {
-    addTodo() {
+    addTodo () {
       window.location.href = this.keyword
     }
   }
@@ -503,5 +497,19 @@ label[for="toggle-all"] {
 
 .hidden {
   display: none;
+}
+
+.home-wrapper {
+	font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	line-height: 1.4em;
+	background: #eaeaea url('../assets/logo.png');
+	color: #4d4d4d;
+	width: 100%;
+	margin: 0 auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: antialiased;
+	-ms-font-smoothing: antialiased;
+	-o-font-smoothing: antialiased;
+	font-smoothing: antialiased;
 }
 </style>
