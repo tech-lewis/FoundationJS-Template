@@ -1,49 +1,51 @@
 <template>
-  <div class="weui_cells_title" v-show="description">{{description || '测试'}}</div>
-  <div class="weui_cells" v-show="type!=='inline'">
-      <div class="weui_cell">
-          <div class="weui_cell_bd weui_cell_primary">
-              <p>{{title}}</p>
-          </div>
-          <div class="weui_cell_ft" v-show="!readonly">
-            <a @click="sub()" class="number-selector":class="{'number-disabled':disabled_min}">-</a>
-            <input v-model="value" class="number-input" v-bind:style="width+'px'"/>
-            <a @click="add()" class="number-selector" :class="{'number-disabled':disabled_max}">+</a>
-          </div>
-          <div class="weui_cell_ft" v-else>
-          {{value}}
-          </div>
+  <div class="weui_cells_title" v-if="description">{{ description || '测试' }}</div>
+  <div class="weui_cells" v-if="type !== 'inline'">
+    <div class="weui_cell">
+      <div class="weui_cell_bd weui_cell_primary">
+        <p>{{ title }}</p>
       </div>
+      <div class="weui_cell_ft" v-if="!readonly">
+        <a @click="sub()" class="number-selector" :class="{ 'number-disabled': disabled_min }">-</a>
+        <input v-model="value" class="number-input" v-bind:style="width + 'px'" />
+        <a @click="add()" class="number-selector" :class="{ 'number-disabled': disabled_max }">+</a>
+      </div>
+      <div class="weui_cell_ft" v-else>
+        {{ value }}
+      </div>
+    </div>
   </div>
   <div class="weui_cell" v-else>
-          <div class="weui_cell_bd weui_cell_primary">
-              <p>{{title}}</p>
-          </div>
-          <div class="weui_cell_ft" v-show="!readonly">
-            <a @click="sub()" class="number-selector":class="{'number-disabled':disabled_min}">-</a>
-            <input v-model="value" class="number-input" v-bind:style="width+'px'"/>
-            <a @click="add()" class="number-selector" :class="{'number-disabled':disabled_max}">+</a>
-          </div>
-          <div class="weui_cell_ft" v-else>
-          {{value}}
-          </div>
-      </div>
+    <div class="weui_cell_bd weui_cell_primary">
+      <p>{{ title }}</p>
+    </div>
+    <div class="weui_cell_ft" v-if="!readonly">
+      <a @click="sub()" class="number-selector" :class="{ 'number-disabled': disabled_min }">-</a>
+      <input v-model="value" class="number-input" v-bind:style="width + 'px'" />
+      <a @click="add()" class="number-selector" :class="{ 'number-disabled': disabled_max }">+</a>
+    </div>
+    <div class="weui_cell_ft" v-else>
+      {{ value }}
+    </div>
+  </div>
   </div>
 </template>
 
 <style>
-  .number-input {
-    border:1px solid #ececec;
-    padding:3px 3px;
-    text-align:center;
-  }
-  .number-selector {
-    font-size:16px;
-    color:#3cc51f;
-  }
-  .number-selector.number-disabled{
-    color:#ccc;
-  }
+.number-input {
+  border: 1px solid #ececec;
+  padding: 3px 3px;
+  text-align: center;
+}
+
+.number-selector {
+  font-size: 16px;
+  color: #3cc51f;
+}
+
+.number-selector.number-disabled {
+  color: #ccc;
+}
 </style>
 
 <script>
