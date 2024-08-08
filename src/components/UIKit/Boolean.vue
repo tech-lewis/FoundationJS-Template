@@ -16,14 +16,14 @@ export default {
     },
     disabled: {
       type: Boolean,
-      default: false,
+      default: false
     },
     value: {
       type: Boolean
     }
   },
   ready: function () {
-    console.log('ready');
+    console.log('ready')
   },
   watch: {
     value: function (newVal) {
