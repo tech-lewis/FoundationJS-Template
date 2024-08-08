@@ -24,7 +24,7 @@ export default {
   ready() {
     console.log('ready')
     console.log('defautl value is', this.selected)
-    this.value = this.selected;
+    this.value = this.selected
   },
   data: function () {
     return {
@@ -33,8 +33,8 @@ export default {
   },
   watch: {
     value: function (newValue) {
-      this.selected = newValue;
-      console.log('child change value', newValue);
+      this.selected = newValue
+      console.log('child change value', newValue)
       this.$dispatch('change', newValue)
     }
   },
