@@ -1,8 +1,20 @@
 <template>
   <div class="home-wrapper">
+    <selector description="no placeholder" title="省份" :options="list"></selector>
+    
+    <selector description="with placeholder" placeholder="请选择省份" title="省份" :options="list" @change="change"></selector>
+
+    <selector description="without title" placeholder="请选择省份" :options="list"></selector>
+
+    <selector description="set value=广西" :selected.sync="selected1" :value.sync="value1" title="省份" :options="list"></selector>
+
+    <selector description="readonly" selected="广东" :readonly=true title="省份" :options="list"></selector>
+
     <ul>
       <li v-for="item in filterNextJSList">{{ item }}</li>
     </ul>
+    <boolean title="default setting"></boolean>
+    <boolean title="default true" :value=true></boolean>
     <span>列表过滤</span><input placeholder="请输入国家名称" type="text" v-model="searchText">
     <ul>
       <li v-for="item in filterCountry">{{ item.name }}</li>
@@ -64,12 +76,20 @@
 
 <script>
 import DevTip from '../components/UIKit/Dev-tip'
+import Boolean from '../components/UIKit/Boolean'
+import Selector from '../components/UIKit/Select'
+import Cell from '../components/UIKit/Cell'
 export default {
   name: 'Home',
   data () {
     return {
       keyword: '',
       searchText: '',
+      list: [{ text: '广东', value: 'gd'}, {text: '广西', value: 'gx'}],
+      selected1: '广西',
+      value1: '',
+      submit001: 'click me',
+      disable001: false,
       countries: [
         { name: 'Afghanistan', languages: ['Pashto', 'Dari'] },
         { name: 'Albania', languages: ['Albanian'] },
@@ -2944,7 +2964,10 @@ export default {
     }
   },
   components: {
-    DevTip
+    DevTip,
+    Boolean,
+    Selector,
+    Cell
   },
   computed: {
     filterCountry () {
@@ -2957,7 +2980,7 @@ export default {
       let conditions = ['beta', 'alpha', 'canary']
       let newList = this.nextVerionList
 
-      conditions.forEach(condition => { newList = newList.filter(item => item.indexOf(condition) == -1) })
+      conditions.forEach(condition => { newList = newList.filter(item => item.indexOf(condition) === -1) })
       console.log(newList.length)
       return newList
     }

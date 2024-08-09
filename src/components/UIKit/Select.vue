@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  ready() {
+  ready () {
     console.log('ready')
     console.log('defautl value is', this.selected)
     this.value = this.selected

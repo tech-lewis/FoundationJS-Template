@@ -18,7 +18,7 @@
 </template>
 
 <script>
-const InlineDesc = require('./Inline-desc')
+import InlineDesc from './Inline-desc'
 module.exports = {
   components: {
     InlineDesc

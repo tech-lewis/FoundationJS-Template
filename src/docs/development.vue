@@ -47,7 +47,9 @@
 </template>
 
 <script>
-import { Group, Cell } from 'vux'
+// import { Group, Cell } from 'vux'
+import Group from '../components/UIKit/Group'
+import Cell from '../components/UIKit/Cell'
 export default {
   components: {
     Group,
