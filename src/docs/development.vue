@@ -4,7 +4,7 @@
     <header><h1>development tips</h1></header>
     <group @click="getDetail">
       <div v-for="item in tips" :key="item.id" v-bind:class="item.id">
-        <cell @click.stop="" v-bind:title="item.name" value="点击查看更多知识点" v-on:click="getDetail(item)"></cell>
+        <cell @click.stop="" v-bind:title="item.name" v-bind:desc="item.tips.join(';')" value="点击查看更多知识点" v-on:click="getDetail(item)"></cell>
       </div>
     </group>
     <section>
@@ -47,7 +47,6 @@
 </template>
 
 <script>
-// import { Group, Cell } from 'vux'
 import Group from '../components/UIKit/Group'
 import Cell from '../components/UIKit/Cell'
 export default {
@@ -59,9 +58,9 @@ export default {
     return {
       selectedLanguages: [],
       tips: [
-        { id: 0, name: '计算属性和watch的区别和使用', languages: ['watch更全能', '计算属性只能返回 但是watch可以处理async异步任务', 'vue管理的函数不能用箭头函数:', '', ''] },
-        { id: 1, name: '计算属性和watch的区别和使用', languages: ['watch更全能', '计算属性只能返回 但是watch可以处理async异步任务', 'vue管理的函数不能用箭头函数:', '', ''] },
-        { id: 2, name: '计算属性和watch的区别和使用', languages: ['watch更全能', '计算属性只能返回 但是watch可以处理async异步任务', 'vue管理的函数不能用箭头函数:', '', ''] }
+        { id: 0, name: '计算属性和watch的区别和使用', tips: ['watch更全能', '计算属性只能返回 但是watch可以处理async异步任务', 'vue管理的函数不能用箭头函数:', '', ''] },
+        { id: 1, name: '计算属性和watch的区别和使用', tips: ['watch更全能', '计算属性只能返回 但是watch可以处理async异步任务', 'vue管理的函数不能用箭头函数:', '', ''] },
+        { id: 2, name: '计算属性和watch的区别和使用', tips: ['watch更全能', '计算属性只能返回 但是watch可以处理async异步任务', 'vue管理的函数不能用箭头函数:', '', ''] }
       ]
     }
   },

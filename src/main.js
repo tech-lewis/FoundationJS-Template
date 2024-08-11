@@ -12,7 +12,6 @@ import VueRouter from 'vue-router'
 // import router from './router'
 // import * as echarts from 'echarts'
 /* eslint-disable no-new */
-// import { Button } from 'vux'
 // import 'styles/index.css'
 // Vue.component('v-button', Button)
 // install router
