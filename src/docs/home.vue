@@ -1,31 +1,10 @@
 <template>
   <div class="home-wrapper">
-    <selector description="no placeholder" title="省份" :options="list"></selector>
-    
-    <selector description="with placeholder" placeholder="请选择省份" title="省份" :options="list" @change="change"></selector>
-
-    <selector description="without title" placeholder="请选择省份" :options="list"></selector>
-
-    <selector description="set value=广西" :selected.sync="selected1" :value.sync="value1" title="省份" :options="list"></selector>
-
-    <selector description="readonly" selected="广东" :readonly=true title="省份" :options="list"></selector>
-
-    <ul>
-      <li v-for="item in filterNextJSList">{{ item }}</li>
-    </ul>
-    <boolean title="default setting"></boolean>
-    <boolean title="default true" :value=true></boolean>
-    <span>列表过滤</span><input placeholder="请输入国家名称" type="text" v-model="searchText">
-    <ul>
-      <li v-for="item in filterCountry">{{ item.name }}</li>
-    </ul>
     <section id="todoapp" sd-controller="Todos" sd-class="filter">
       <header id="header">
-        <h1>todos</h1>
         <!-- main input box -->
         <input id="new-todo" autofocus v-model="keyword" @keyup.enter="addTodo" placeholder="输入您想做的事情" />
       </header>
-
       <section id="main" sd-show="total < todos">
         <input id="toggle-all" type="checkbox" sd-checked="allDone" sd-on="change:toggleAll" />
         <ul id="todo-list">
@@ -68,9 +47,13 @@
     <!-- info -->
     <footer id="info">
       <p>Double-click to edit a todo</p>
-      <p>Powered by <a href="https://github.com/yyx990803/seed">Seed.js</a></p>
+      <p>Powered by <a href="https://github.com/yyx990803/seed">Angular.js</a></p>
       <p>Created by <a href="http://evanyou.me">刘竞</a></p>
     </footer>
+    <span>列表过滤</span><input placeholder="请输入国家名称" type="text" v-model="searchText">
+    <ul>
+      <li v-for="item in filterCountry">{{ item.name }}</li>
+    </ul>
   </div>
 </template>
 
