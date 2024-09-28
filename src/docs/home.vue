@@ -1,55 +1,5 @@
 <template>
   <div class="home-wrapper">
-    <section id="todoapp" sd-controller="Todos" sd-class="filter">
-      <header id="header">
-        <!-- main input box -->
-        <input id="new-todo" autofocus v-model="keyword" @keyup.enter="addTodo" placeholder="输入您想做的事情" />
-      </header>
-      <section id="main" sd-show="total < todos">
-        <input id="toggle-all" type="checkbox" sd-checked="allDone" sd-on="change:toggleAll" />
-        <ul id="todo-list">
-          <!-- a single todo item -->
-          <li sd-each="todo:todos" sd-class="completed:todo.done, editing:todo.editing">
-            <div class="view">
-              <input class="toggle" type="checkbox" sd-checked="todo.done" sd-on="change:updateCount" />
-              <label sd-text="todo.text" sd-on="dblclick:edit"></label>
-              <button class="destroy" sd-on="click:removeTodo"></button>
-            </div>
-            <input class="edit" type="text" sd-focus="todo.editing" sd-on="blur:stopEdit, keyup:stopEdit | key enter"
-              sd-value="todo.text" />
-          </li>
-        </ul>
-      </section>
-
-      <!-- footer controls -->
-      <footer id="footer" sd-show="total < todos">
-        <span id="todo-count">
-          <strong sd-text="remaining"></strong>
-          <span sd-text="itemLabel < remaining"></span>
-          left
-        </span>
-        <ul id="filters">
-          <li>
-            <a href="#/all" data-filter="all" sd-on="click:setFilter">All</a>
-          </li>
-          <li>
-            <a href="#/active" data-filter="active" sd-on="click:setFilter">Active</a>
-          </li>
-          <li>
-            <a href="#/completed" data-filter="completed" sd-on="click:setFilter">Completed</a>
-          </li>
-        </ul>
-        <button id="clear-completed" sd-on="click:removeCompleted">
-          Remove Completed (<span sd-text="completed < total remaining"></span>)
-        </button>
-      </footer>
-    </section>
-    <!-- info -->
-    <footer id="info">
-      <p>Double-click to edit a todo</p>
-      <p>Powered by <a href="https://github.com/yyx990803/seed">Angular.js</a></p>
-      <p>Created by <a href="http://evanyou.me">刘竞</a></p>
-    </footer>
     <span>列表过滤</span><input placeholder="请输入国家名称" type="text" v-model="searchText">
     <ul>
       <li v-for="item in filterCountry">{{ item.name }}</li>
@@ -3010,7 +2960,7 @@ button {
 #todoapp {
   background: #fff;
   background: rgba(255, 255, 255, 0.9);
-  margin: 130px 16px 40px 16px;
+  margin: 0px 16px 40px 16px;
   border: 1px solid #ccc;
   position: relative;
   border-top-left-radius: 2px;
@@ -3056,7 +3006,7 @@ button {
 }
 
 #header {
-  margin-top: 15px;
+  /* margin-top: 15px; */
   border-radius: inherit;
 }
 
@@ -3406,11 +3356,10 @@ label[for="toggle-all"] {
   background: #eaeaea url('../assets/logo.png');
   color: #4d4d4d;
   width: 100%;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
   -ms-font-smoothing: antialiased;
   -o-font-smoothing: antialiased;
-  font-smoothing: antialiased;
 }
 </style>

@@ -339,7 +339,7 @@ body {
 .app__main p + span,
 .app__main h2 + span,
 .app__main h3 + span {
-  margin: 10px 0 24px;
+  margin: 0px 0 24px;
 }
 .app__main p + span,
 .app__main h2 + span,
