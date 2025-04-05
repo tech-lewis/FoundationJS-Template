@@ -46,12 +46,21 @@
     <selector description="love story" selected="2024-12-26" :readonly=true title="陪梦瑶一起看电视，不关门洗洗"></selector>
     <selector description="love story" selected="2024-12-27" :readonly=true title="一起买榴莲雪糕，一起吃雪糕"></selector>
     <selector description="love story" selected="2024-12-28" :readonly=true title="一起逛坪洲商场，在海马体拍照"></selector>
+    <selector description="love story" selected="2024-12-29" :readonly=true title="约姐姐一起去买5金"></selector>
+    <selector description="love story" selected="2025-01-01" :readonly=true title="约好婚纱照一起拼相框积木"></selector>
     <selector description="love story" selected="2025-01-06" :readonly=true title="早上去机场接梦瑶回家"></selector>
-    <selector description="love story" selected="2025-01-06" :readonly=true title="早上去机场接梦瑶回家"></selector>
+    <selector description="love story" selected="2025-01-07" :readonly=true title="一起拍婚纱照"></selector>
+    <selector description="love story" selected="2025-01-10" :readonly=true title="和梦瑶一起坐高铁"></selector>
+    <selector description="love story" selected="2025-01-11" :readonly=true title="订婚"></selector>
     <selector description="love story" selected="2025-01-13" :readonly=true title="我们结婚领证啦"></selector>
-    <selector description="love story" selected="2025-01-29" :readonly=true title="我们"></selector>
+    <selector description="love story" selected="2025-01-26" :readonly=true title="在黄石一起吃年夜饭"></selector>
+    <selector description="love story" selected="2025-01-27" :readonly=true title="一起回家，在梦瑶家吃年夜饭"></selector>
+    <selector description="love story" selected="2025-01-28" :readonly=true title="敏子哥带我去梦瑶家，在老家和大伯三伯四伯吃年夜饭"></selector>
+    <selector description="love story" selected="2025-01-29" :readonly=true title="我们在老家一起吃年夜饭，不要让梦瑶难过"></selector>
+    <selector description="love story" selected="2025-02-04" :readonly=true title="第一次开车去鄂城第二医院，梦瑶妈妈准备做手术"></selector>
+    <selector description="love story" selected="2025-02-05" :readonly=true title="梦瑶在医院，妈妈上午已经做了手术"></selector>
     <selector description="love story" selected="2025-02-14" :readonly=true title="我们一起过节，送手机"></selector>
-    <selector description="love story" selected="2025-02-27" :readonly=true title="我们结婚了"></selector>
+    <selector description="love story" selected="2025-02-27" :readonly=true title="我们办婚礼了"></selector>
     <selector description="love story" selected="2025-03-03" :readonly=true title="我们晚上到了深圳北站吃烤鱼"></selector>
     <selector description="love story" selected="2025-03-11" :readonly=true title="梦瑶做了美味的一顿晚餐"></selector>
   </div>
