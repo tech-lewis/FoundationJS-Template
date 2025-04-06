@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Power by Electron</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=yes">
+  <link href="https://cdn.bootcdn.net/ajax/libs/element-ui/0.1.3/theme-default/index.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="dist/style.css">
+  <link rel="stylesheet" href="dist/weui.min.css">
+  <style>
+    body {
+      font-family: Helvetica Neue, Arial, sans-serif;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .item {
+      cursor: pointer;
+    }
+
+    .bold {
+      font-weight: bold;
+      padding-top: 4px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #444;
+      color: dodgerblue;
+    }
+
+    ul li {
+      margin-top: 10px;
+      padding-left: 1em;
+      line-height: 1.5em;
+      list-style-type: none;
+    }
+
+    .modal-mask {
+      position: fixed;
+      z-index: 9998;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, .5);
+      display: table;
+      transition: opacity .3s ease;
+    }
+
+    .modal-wrapper {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .modal-container {
+      width: 230px;
+      margin: 0px auto;
+      padding: 20px 30px;
+      background-color: #fff;
+      border-radius: 2px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+      transition: all .3s ease;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+
+    .modal-header h3 {
+      margin-top: 0;
+      color: #42b983;
+    }
+
+    .modal-body {
+      margin: 20px 0;
+    }
+
+    .modal-default-button {
+      float: right;
+    }
+
+    /*
+      * the following styles are auto-applied to elements with
+      * v-transition="modal" when their visibility is toggled
+      * by Vue.js.
+      *
+      * You can easily play with the modal transition by editing
+      * these styles.
+      */
+
+    .modal-enter,
+    .modal-leave {
+      opacity: 0;
+    }
+
+    .modal-enter .modal-container,
+    .modal-leave .modal-container {
+      -webkit-transform: scale(1.1);
+      transform: scale(1.1);
+    }
+
+    table {
+      border: 2px solid #42b983;
+      border-radius: 3px;
+      background-color: #fff;
+    }
+
+    th {
+      background-color: #42b983;
+      color: rgba(255, 255, 255, 0.66);
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -user-select: none;
+    }
+
+    td {
+      background-color: #f9f9f9;
+    }
+
+    th,
+    td {
+      min-width: 120px;
+      padding: 10px 20px;
+    }
+
+    th.active {
+      color: #fff;
+    }
+
+    th.active .arrow {
+      opacity: 1;
+    }
+
+    .arrow {
+      display: inline-block;
+      vertical-align: middle;
+      width: 0;
+      height: 0;
+      margin-left: 5px;
+      opacity: 0.66;
+    }
+
+    .arrow.asc {
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-bottom: 4px solid #fff;
+    }
+
+    .arrow.dsc {
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 4px solid #fff;
+    }
+  </style>
+  <script src="./vue-lite.js" id="vue-lite-code"></script>
+</head>
+
+<body>
+  <!-- template for the modal component -->
+  <script type="x/template" id="modal-template">
+      <div class="modal-mask" v-show="show" transition="modal">
+        <div class="modal-wrapper">
+          <div class="modal-container">
+
+            <div class="modal-header">
+              <slot name="header">
+                default header
+              </slot>
+            </div>
+            
+            <div class="modal-body">
+              <slot name="body">
+                default body
+              </slot>
+            </div>
+
+            <div class="modal-footer">
+              <slot name="footer">
+                default footer
+                <button class="modal-default-button"
+                  @click="show = false">
+                  OK
+                </button>
+              </slot>
+            </div>
+          </div>
+        </div>
+      </div>
+    </script>
+  <!-- component template -->
+  <script type="text/x-template" id="grid-template">
+      <table>
+        <thead>
+          <tr>
+            <th v-for="key in columns"
+              @click="sortBy(key)"
+              :class="{active: sortKey == key}">
+              {{key | capitalize}}
+              <span class="arrow"
+                :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="
+            entry in data
+            | filterBy filterKey
+            | orderBy sortKey sortOrders[sortKey]">
+            <td v-for="key in columns">
+              {{entry[key]}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </script>
+  <!-- item template -->
+  <script type="text/x-template" id="item-template">
+      <li>
+        <div
+          :class="{bold: isFolder}"
+          @click="toggle"
+          @dblclick="changeType">
+          {{model.name}}
+          <span v-if="isFolder">[{{open ? '-' : '+'}}]</span>
+        </div>
+        <ul v-show="open" v-if="isFolder">
+          <item
+            class="item"
+            v-for="model in model.children"
+            :model="model">
+          </item>
+          <li style="color: #ff8800" @click="addChild">+</li>
+        </ul>
+      </li>
+    </script>
+  <script>
+    // register modal component
+    Vue.component('modal', {
+      template: '#modal-template',
+      props: {
+        show: {
+          type: Boolean,
+          required: true,
+          twoWay: true
+        }
+      }
+    })
+    // define the item component
+    Vue.component('item', {
+      template: '#item-template',
+      replace: true,
+      props: {
+        model: Object
+      },
+      data: function () {
+        return {
+          open: false
+        }
+      },
+      computed: {
+        isFolder: function () {
+          return this.model.children &&
+            this.model.children.length
+        }
+      },
+      methods: {
+        toggle: function () {
+          if (this.isFolder) {
+            this.open = !this.open
+          }
+        },
+        changeType: function () {
+          if (!this.isFolder) {
+            Vue.set(this.model, 'children', [])
+            this.addChild()
+            this.open = true
+          }
+        },
+        addChild: function () {
+          this.model.children.push({
+            name: 'new stuff'
+          })
+        }
+      }
+    })
+  </script>
+  <div id="app">
+    <div class="ios4" style="display: none;">
+      <item class="item" :model="treeData">
+      </item>
+      <button id="show-modal" @click="showModal = true">提示弹窗</button>
+      <!-- use the modal component, pass in the prop -->
+      <modal :show.sync="showModal">
+        <!--
+            you can use custom content here to overwrite
+            default content
+          -->
+        <h3 slot="header">关于本机</h3>
+        <h3 slot="body">{{ window.navigator.userAgent }}</h3>
+      </modal>
+    </div>
+  </div>
+
+  <script>
+    // 判断iOS版本, 兼容旧版本的系统
+    var data = {
+      name: 'My 一级目录',
+      children: [
+        { name: 'My-hello' },
+        { name: 'My-wat' },
+        {
+          name: 'My-二级文件夹',
+          children: [
+            {
+              name: 'My-三级文件夹',
+              children: [
+                { name: 'hello' },
+                { name: 'wat' }
+              ]
+            },
+            { name: 'My-二级hello' },
+            { name: 'My-二级wat' },
+            {
+              name: 'child folder',
+              children: [
+                { name: 'hello' },
+                { name: 'wat' }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    // start app
+    new Vue({
+      el: '#app',
+      data: {
+        showModal: false,
+        treeData: data,
+        window: window
+      }
+    })
+    var element = document.querySelector('.ios4')
+    element.style.display = 'block'
+  </script>
+</body>
+
+</html>

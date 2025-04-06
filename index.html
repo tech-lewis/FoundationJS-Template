@@ -1,16 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Power by Electron</title>
-    <link href="https://cdn.bootcdn.net/ajax/libs/element-ui/0.1.3/theme-default/index.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="dist/style.css">
-    <link rel="stylesheet" href="dist/weui.min.css">
-  </head>
-  <body>
-    <div id="app"></dib>
+
+<head>
+  <meta charset="utf-8">
+  <title>Power by Electron</title>
+
+  <link href="https://cdn.bootcdn.net/ajax/libs/element-ui/0.1.3/theme-default/index.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="dist/style.css">
+  <link rel="stylesheet" href="dist/weui.min.css">
+  <script>
+    function isMacOS () {
+      return /Mac/.test(navigator.platform);
+    }
+    function getSafariVersion() {
+      var userAgent = navigator.userAgent.toLowerCase();
+      var version = userAgent.match(/version\/([\d\.]+)/i);
+      if (userAgent.indexOf('safari') !== -1 && userAgent.indexOf('chrome') === -1) {
+        return version ? version[1] : null; // 返回版本号，如果没有找到则为null
+      } else {
+        return null; // 不是Safari浏览器
+      }
+    }
+
+    function getChromeVersion () {
+      var userAgent = navigator.userAgent;
+      var versionRegex = /Chrome\/(\d+)/;
+      var match = userAgent.match(versionRegex);
+      if (match && match.length > 1) {
+        return match[1];
+      } else {
+        return getSafariVersion()
+      }
+    }
+    if (getChromeVersion <= 5) {
+      window.location.href = './app.html'
+    }
+  </script>
+</head>
+
+<body>
+  <div id="app">
+    </dib>
     <script src="dist/build.js"></script>
     <script type="text/javascript" charset="utf-8">
+      function isMacOS() {
+        return /Mac/.test(navigator.platform);
+      }
+
+      // 判断iOS版本, 兼容旧版本的系统
+      const iOSVersion = window.navigator.appVersion || '' // str.match(/cpu iphone os (.*?) like mac os/)
+      const isiOS = !!window.navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
+      var appVersion = iOSVersion.match(/OS (\d+)_(\d+)_?(\d+)?/)
+      appVersion = isiOS === true ? parseInt(appVersion[1], 10) : 99 // 最大值
+      alert(isMacOS())
+
+      if (isMacOS()) {
+        console.log("当前操作系统是MacOS");
+      } else {
+        console.log("当前操作系统不是MacOS");
+      }
+
+      if (isiOS && parseInt(appVersion) < 6) {
+        window.location = 'app.html'
+        return;
+      }
       if (/Atom/.test(window.navigator.userAgent)) {
         console.log('Welcome to Electron')
         document.title = 'Power by Electron 2013.8'
@@ -21,5 +74,6 @@
         }, false);
       }
     </script>
-  </body>
+</body>
+
 </html>
