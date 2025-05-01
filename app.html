@@ -295,6 +295,10 @@
           -->
         <h3 slot="header">关于本机</h3>
         <h3 slot="body">{{ window.navigator.userAgent }}</h3>
+        <div slot="footer" class="modal-footer">
+          <span style="color: #ff8800;">App兼容iOS 5.0以上系统</span>
+          <button @click="showModal = false">确定</button>
+        </div>
       </modal>
     </div>
   </div>
