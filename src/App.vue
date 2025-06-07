@@ -1,7 +1,9 @@
 <template>
   <div class="container" style="margin: 0 auto;text-align: center;">
     <img src="./logo.png">
-    <h1>Hello Vue 3(preview)!</h1>
+    <h1>MENG-ZI(preview)</h1>
+    <strong>企业官网</strong>
+    <van-button type='primary' @click="inc">你好梦瑶</van-button>
     <button @click="inc">Clicked {{ count }} times.</button>
   </div>
 </template>
@@ -32,7 +34,8 @@ export default {
   align-items: center;
 }
 img {
-  width: 200px;
+  width: 100px;
+  background: #ccc;
 }
 h1 {
   font-family: Arial, Helvetica, sans-serif;
