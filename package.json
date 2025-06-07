@@ -5,6 +5,7 @@
     "build": "webpack --env.prod"
   },
   "dependencies": {
+    "amfe-flexible": "^2.2.1",
     "vant": "3.0.0-alpha.0",
     "vue": "^3.0.0-rc.9"
   },
