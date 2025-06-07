@@ -1,7 +1,9 @@
 <template>
-  <img src="./logo.png">
-  <h1>Hello Vue 3!</h1>
-  <button @click="inc">Clicked {{ count }} times.</button>
+  <div class="container" style="margin: 0 auto;text-align: center;">
+    <img src="./logo.png">
+    <h1>Hello Vue 3(preview)!</h1>
+    <button @click="inc">Clicked {{ count }} times.</button>
+  </div>
 </template>
 
 <script>
@@ -23,6 +25,12 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 img {
   width: 200px;
 }
