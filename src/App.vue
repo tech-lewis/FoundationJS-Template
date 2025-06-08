@@ -42,7 +42,7 @@ export default {
     }
 
     const tips = () => {
-      window.alert('梦瑶一点不可爱，她是大华人')
+      window.alert('梦瑶就是狸猫')
     }
 
     return {
@@ -57,10 +57,7 @@ export default {
 
 <template>
   <div class="container">
-    <van-cell-group class="list">
-      <van-cell title="单元格" value="内容" />
-      <van-cell v-for="(item, index) in list" :key="index" :title="item.text" :value="item.age" :label="item.label" @click="tips" />
-    </van-cell-group>
+    <router-view></router-view>
   </div>
 </template>
 
