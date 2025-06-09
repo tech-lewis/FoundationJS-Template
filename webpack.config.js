@@ -20,15 +20,15 @@ module.exports = (env = {}) => ({
   module: {
     rules: [
       {
+        test: /\.vue$/,
+        use: 'vue-loader'
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules\/(?!vue-router)/, // 排除其他 node_modules，但不包括 vue-router
         use: {
           loader: 'babel-loader'
         }
-      },
-      {
-        test: /\.vue$/,
-        use: 'vue-loader'
       },
       {
         test: /\.png$/,

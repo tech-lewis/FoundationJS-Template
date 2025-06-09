@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <van-nav-bar class="nav" title="登录"></van-nav-bar>
+    <van-nav-bar class="nav-bar" title="登录"></van-nav-bar>
     <van-form @failed="onFailed" @submit="onSubmit">
       <van-cell-group inset>
         <!-- 通过 pattern 进行正则校验 -->
@@ -115,20 +115,8 @@ export default {
 };
 </script>
 
-<style>
-.login {
-  width: 100%;
-}
-.nav {
-  height: 44px;
-  vertical-align: middle;
-  text-align: center;
-  display: flex;
-  align-items: center;
+<style scoped>
+.van-nav-bar {
   background-color: #3296fa;
-}
-
-.nav .van-nav-bar__title {
-  color: #fff;
 }
 </style>
