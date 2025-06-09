@@ -5,13 +5,19 @@
     "build": "webpack --env.prod"
   },
   "dependencies": {
+    "@babel/plugin-transform-runtime": "7.27.4",
     "amfe-flexible": "^2.2.1",
+    "core-js": "3",
     "vant": "3.0.0-alpha.3",
     "vue": "^3.0.0-rc.9",
     "vue-router": "4.0.0-beta.5"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
     "@vue/compiler-sfc": "^3.0.0-rc.9",
+    "autoprefixer": "^10.1.0",
+    "babel-loader": "^8.2.2",
     "css-loader": "^4.2.2",
     "file-loader": "^6.0.0",
     "mini-css-extract-plugin": "^0.11.0",

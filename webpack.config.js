@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { runtime } = require('webpack')
 
 module.exports = (env = {}) => ({
   mode: env.prod ? 'production' : 'development',
@@ -18,6 +19,13 @@ module.exports = (env = {}) => ({
   },
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules\/(?!vue-router)/, // 排除其他 node_modules，但不包括 vue-router
+        use: {
+          loader: 'babel-loader'
+        }
+      },
       {
         test: /\.vue$/,
         use: 'vue-loader'
@@ -40,6 +48,10 @@ module.exports = (env = {}) => ({
         ]
       }
     ]
+  },
+  optimization: {
+    splitChunks: false, // 禁用代码分割
+    runtimeChunk: false
   },
   plugins: [
     new VueLoaderPlugin(),

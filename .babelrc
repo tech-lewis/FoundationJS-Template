@@ -1,0 +1,15 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "ie": "8"  // 指定目标浏览器，这里以 IE8 为例
+        },
+        "useBuiltIns": "usage",  // 按需引入 polyfill
+        "corejs": 3  // 使用 core-js@3
+      }
+    ]
+  ],
+  "plugins": ["@babel/plugin-transform-runtime"]
+}
