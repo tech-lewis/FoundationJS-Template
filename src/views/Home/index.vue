@@ -1,5 +1,7 @@
 <script>
 import { ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+
 
 var test = [
   {text: '基金产品', age: 10010, label: 'Overseas'}
@@ -43,13 +45,17 @@ export default {
       {text: '基金产品', age: 2025, label: 'Overseas OTC'},
       {text: '基金产品', age: 2026, label: 'Overseas OTC'},
     ])
-
+    const router = useRouter()
+    const toLogin = () => {
+        router.push('/login')
+    }
     return {
       isLogin,
       list,
+      toLogin,
       checkLogin: function () {
         console.log('checkLogin')
-        isLogin.value = true
+        // isLogin.value = true
       }
     }
   }
@@ -61,7 +67,7 @@ export default {
   <div class="home">
     <van-cell-group class="list">
       <van-cell title="单元格" value="内容" />
-      <van-cell v-for="(item, index) in list" :key="index" :title="item.text" :value="item.age" :label="item.label" @click="checkLogin" />
+      <van-cell v-for="(item, index) in list" :key="index" :title="item.text" :value="item.age" :label="item.label" @click="toLogin" />
     </van-cell-group>
   </div>
 </template>
