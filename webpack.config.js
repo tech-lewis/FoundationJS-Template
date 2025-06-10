@@ -2,7 +2,8 @@ const path = require('path')
 const webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const { runtime } = require('webpack')
+const TerserPlugin = require('terser-webpack-plugin')
+// const { runtime } = require('webpack')
 
 module.exports = (env = {}) => ({
   mode: env.prod ? 'production' : 'development',
@@ -50,6 +51,11 @@ module.exports = (env = {}) => ({
     ]
   },
   optimization: {
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: { safari10: true } // 修复变量重复声明的问题 Safari 10修正
+      })
+    ],
     splitChunks: false, // 禁用代码分割
     runtimeChunk: false
   },
