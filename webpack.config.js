@@ -20,15 +20,15 @@ module.exports = (env = {}) => ({
   module: {
     rules: [
       {
+        test: /\.vue$/,
+        use: 'vue-loader'
+      },
+      {
         test: /\.js$/,
         include: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'node_modules/vue-router')],
         use: {
           loader: 'babel-loader'
         }
-      },
-      {
-        test: /\.vue$/,
-        use: 'vue-loader'
       },
       {
         test: /\.png$/,

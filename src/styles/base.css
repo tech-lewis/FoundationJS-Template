@@ -1,0 +1,15 @@
+
+.login {
+  width: 100%;
+}
+.nav-bar {
+  height: 44px;
+  vertical-align: middle;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.nav-bar .van-nav-bar__title {
+  color: #fff;
+}

@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <van-nav-bar class="nav" title="登录"></van-nav-bar>
+    <van-nav-bar class="nav-bar" title="登录"></van-nav-bar>
     <van-form @failed="onFailed" @submit="onSubmit">
       <van-cell-group inset>
         <!-- 通过 pattern 进行正则校验 -->
@@ -48,14 +48,31 @@
 <script>
 import { Toast } from "vant";
 import { ref, reactive, toRefs } from 'vue';
+import { useRouter, useRoute } from 'vue-router'
+
+
 function useSubmit () {
-  const onSubmit = async () => {}
+  const onSubmit = async () => {
+    // 模拟网络请求并且跳转到home
+    const router = useRouter()
+    router.push('/')
+    // 模拟登录
+    Toast.loading("_(:з」∠)_登录...");
+    setTimeout(() => {
+      Toast.clear();
+      router.push({ path: '/'})
+    }, 1000);
+  }
 
   return {
     onSubmit // 封装的hook
   }
 }
 
+
+// function onSubmit (values) {
+//   console.log('submit', values);
+// }
 export default {
   setup() {
     const value1 = ref("");
@@ -84,8 +101,16 @@ export default {
     const onFailed = errorInfo => {
       console.log("failed", errorInfo);
     };
-
-
+    const router = useRouter()
+    const onSubmit = (values)=> {
+      console.log(values)
+      // 模拟登录
+      Toast.loading("_(:з」∠)_登录...");
+      setTimeout(() => {
+        Toast.clear();
+        router.push({ path: '/'})
+      }, 1000);
+    }
     const user = reactive({
       userNo: '',
       phone: '',
@@ -100,35 +125,17 @@ export default {
       onFailed,
       validator,
       asyncValidator,
+      onSubmit,
       ...toRefs(user),
-      ...useSubmit(user),
-      onSubmit: (values) => {
-        console.log('submit', values);
-        // 模拟登录
-        Toast.loading("_(:з」∠)_登录...");
-        setTimeout(() => {
-          Toast.clear();
-        }, 1000);
-      }
+      // ...useSubmit(user),
+      
     };
   }
 };
 </script>
 
-<style>
-.login {
-  width: 100%;
-}
-.nav {
-  height: 44px;
-  vertical-align: middle;
-  text-align: center;
-  display: flex;
-  align-items: center;
+<style scoped>
+.van-nav-bar {
   background-color: #3296fa;
-}
-
-.nav .van-nav-bar__title {
-  color: #fff;
 }
 </style>

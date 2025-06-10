@@ -10,6 +10,6 @@
         "corejs": 3  // 使用 core-js@3
       }
     ]
-  ],
-  "plugins": ["@babel/plugin-transform-runtime"]
+  ]
+  // "plugins": ["@babel/plugin-transform-runtime"]
 }
