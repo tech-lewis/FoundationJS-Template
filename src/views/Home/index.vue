@@ -46,17 +46,11 @@ export default {
       {text: '基金产品', age: 2026, label: 'Overseas OTC'},
     ])
     const router = useRouter()
-    const toLogin = () => {
-        router.push('/login')
-    }
     return {
       isLogin,
       list,
       toLogin,
-      checkLogin: function () {
-        console.log('checkLogin')
-        // isLogin.value = true
-      }
+      router
     }
   }
 };
@@ -65,9 +59,10 @@ export default {
 
 <template>
   <div class="home">
-    <van-cell-group class="list">
+    <van-button type="primary" @click="() => { router.push('/login') }">登录</van-button>
+    <van-cell-group class="list" >
       <van-cell title="单元格" value="内容" />
-      <van-cell v-for="(item, index) in list" :key="index" :title="item.text" :value="item.age" :label="item.label" @click="toLogin" />
+      <van-cell v-for="(item, index) in list" :key="index" :title="item.text" :value="item.age" :label="item.label"/>
     </van-cell-group>
   </div>
 </template>
