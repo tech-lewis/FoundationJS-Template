@@ -49,7 +49,6 @@ export default {
     return {
       isLogin,
       list,
-      toLogin,
       router
     }
   }
