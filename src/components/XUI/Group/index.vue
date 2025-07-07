@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import GroupTitle from "./Group-title";
+import GroupTitle from "../GroupTitle/index.vue";
 export default {
   components: {
     GroupTitle,

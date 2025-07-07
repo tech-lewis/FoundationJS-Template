@@ -2,13 +2,19 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Cell from '@/components/XUI/xCell/index.vue'
+import Group from '@/components/XUI/Group/index.vue'
+import Date from '@/components/XUI/DateCell/index.vue'
+import xButton from '@/components/XUI/Button/index.vue'
 
 var test = [
   {text: '基金产品', age: 10010, label: 'Overseas'}
 ]
 export default {
   components: {
-    Cell
+    Cell,
+    Date,
+    Group,
+    xButton
   },
   setup () {
     const isLogin = ref({
@@ -61,15 +67,17 @@ export default {
 
 <template>
   <div class="home">
-	<div class="weui_cell weui_cell_switch">
-	    <div class="weui_cell_hd weui_cell_primary">测试</div>
-	    <div class="weui_cell_ft">
-	        <input class="weui_switch" type="checkbox"/>
-	    </div>
-	</div>
+    <Group>
+      <Date title="生日"></Date>
+    </Group>
+    <Cell title="功能消息免打扰" inlineDesc="副标题" :is_link='true'></Cell>
     <Cell title="功能消息免打扰" inlineDesc="富文本" :is_link='true'></Cell>
-    <Cell title="功能消息免打扰" inlineDesc="富文本" :is_link='true'></Cell>
-
+    <div style="text-align: center;">
+      <p>xButton Demo</p>
+      <div class="demo" style="margin: 16px;">
+        <xButton type="primary" text="按钮"></xButton>
+      </div>
+    </div>
   </div>
 </template>
 
