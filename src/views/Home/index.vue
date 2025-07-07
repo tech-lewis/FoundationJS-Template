@@ -1,12 +1,15 @@
 <script>
 import { ref } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-
+import { useRouter } from 'vue-router'
+import Cell from '@/components/XUI/xCell/index.vue'
 
 var test = [
   {text: '基金产品', age: 10010, label: 'Overseas'}
 ]
 export default {
+  components: {
+    Cell
+  },
   setup () {
     const isLogin = ref({
       ...test
@@ -58,11 +61,15 @@ export default {
 
 <template>
   <div class="home">
-    <van-button type="primary" @click="() => { router.push('/login') }">登录</van-button>
-    <van-cell-group class="list" >
-      <van-cell title="单元格" value="内容" />
-      <van-cell v-for="(item, index) in list" :key="index" :title="item.text" :value="item.age" :label="item.label"/>
-    </van-cell-group>
+	<div class="weui_cell weui_cell_switch">
+	    <div class="weui_cell_hd weui_cell_primary">测试</div>
+	    <div class="weui_cell_ft">
+	        <input class="weui_switch" type="checkbox"/>
+	    </div>
+	</div>
+    <Cell title="功能消息免打扰" inlineDesc="富文本" :is_link='true'></Cell>
+    <Cell title="功能消息免打扰" inlineDesc="富文本" :is_link='true'></Cell>
+
   </div>
 </template>
 

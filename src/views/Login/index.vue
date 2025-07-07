@@ -1,47 +1,6 @@
 <template>
   <div class="login">
-    <van-nav-bar class="nav-bar" title="登录"></van-nav-bar>
-    <van-form @failed="onFailed" @submit="onSubmit">
-      <van-cell-group inset>
-        <!-- 通过 pattern 进行正则校验 -->
-        <van-field
-          v-model="userNo"
-          name="userNo"
-          left-icon="manager"
-          placeholder="请输入6位账号"
-          :rules="[{ pattern, message: '请输入正确的账号' }]"
-        />
-        <!-- 通过 validator 进行函数校验 -->
-        <van-field
-          v-model="phone"
-          name="phone"
-          placeholder="请输入您的手机号"
-          left-icon="phone"
-          :rules="[{ validator, message: '请输入正确内容' }]"
-        />
-        <!-- 通过 validator 返回错误提示 -->
-        <van-field
-          v-model="phone"
-          name="phone"
-          placeholder="校验函数返回错误提示"
-          left-icon="phone-o"
-          :rules="[{ validator: validatorMessage }]"
-        />
-        <!-- 通过 validator 进行异步函数校验 -->
-        <van-field
-          v-model="password"
-          name="password"
-          placeholder="异步校验您的密码"
-          left-icon="lock"
-          type="password"
-          :rules="[{ validator: asyncValidator, message: '请输入正确内容' }]"
-        />
-      </van-cell-group>
-      <div style="margin: 16px;">
-        <van-button round block type="primary" native-type="submit">Orz 我要登录</van-button>
-      </div>
-    </van-form>
-    {{password}}
+    移除Vant4
   </div>
 </template>
 

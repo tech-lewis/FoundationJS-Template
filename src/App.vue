@@ -57,19 +57,24 @@ export default {
 
 <template>
   <div class="container">
-    <router-view></router-view>
+    <router-view class="view"></router-view>
   </div>
 </template>
 
 
 <style scoped>
 .container {
-  width: 100%;
+  width: 100vw;
   display: flex;
   flex: 1;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.view {
+  width: 100%;
+  height: 100%;
 }
 
 .list {
