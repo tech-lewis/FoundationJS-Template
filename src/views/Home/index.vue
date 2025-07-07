@@ -8,7 +8,7 @@ import Loading from '@/components/XUI/MyLoading/index.vue'
 import MyInput from '@/components/XUI/MyInput/index.vue'
 import xButton from '@/components/XUI/Button/index.vue'
 import Switch from '@/components/XUI/SwitchCell/index.vue'
-
+import Number from '@/components/XUI/MyNumberInput/index.vue'
 var test = [
   {text: '基金产品', age: 10010, label: 'Overseas'}
 ]
@@ -32,7 +32,8 @@ export default {
     MyInput,
     xButton,
     Loading,
-    Switch
+    Switch,
+    Number
   },
   data () {
     return {
@@ -59,7 +60,6 @@ export default {
     const isLogin = ref({
       ...test
     })
-    const show1 = ref(false)
     const list = ref([
       ...test,
       {text: '基金产品', age: 1996, label: 'Overseas OTC'},
@@ -108,8 +108,33 @@ export default {
 <template>
   <div class="home">
     <Group>
-      <Switch title="开关" v-model="show1" @change="show1change"></Switch>
+      <Switch title="显示Loading" v-model="show1" @change="show1change"></Switch>
       <Date title="生日"></Date>
+    </Group>
+    <Group title="Default">
+      <Number title="Number"></Number>
+    </Group>
+      
+    <Group title="listen to change events">
+      <Number title="Number" :value=0 :min=0 @change="change"></Number>
+    </Group>
+    <Group title="set width=100">
+      <Number title="Number" :width=100></Number>
+    </Group>
+    <Group title="set step=0.5">
+      <Number title="Number" :step=0.5></Number>
+    </Group>
+
+    <Group title="set value=1, min=-5 and max=8">
+      <Number title="Number" :min=-5 :max=8 :value=1></Number>
+    </Group>
+    <Group title="set value and readonly">
+      <Number :value=10 :readonly=true title="Number"></Number>
+    </Group>
+    <Group title='with other element'>
+      <Number title="Number" :min=-5 :max=8 :value=1 type="inline"></Number>
+      <Number title="Number" :min=-5 :max=8 :value=1 type="inline"></Number>
+      <Switch title="Other element" :value=true></Switch>
     </Group>
     <Cell title="功能消息免打扰" inlineDesc="副标题" :is_link='true'></Cell>
     <Cell title="功能消息免打扰" inlineDesc="富文本" :is_link='true'></Cell>
