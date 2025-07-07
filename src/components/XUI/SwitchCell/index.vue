@@ -42,7 +42,7 @@ export default {
   ready: function () {},
   watch: {
     value: function (newVal) {
-      this.$emmit("change", newVal);
+      this.$emit("change", newVal);
     },
   },
 };

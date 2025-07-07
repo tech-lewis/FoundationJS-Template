@@ -26,7 +26,7 @@ export default {
       if (this.prisine === true) {
         this.prisine = false;
       }
-      this.$emmit("change", newVal);
+      this.$emit("change", newVal);
     },
   },
   data: function () {
