@@ -39,7 +39,7 @@ export default {
   methods: {
     dispatchEvent(event, message) {
       if (event === "menu-click") {
-        this.$dispatch(event, message);
+        this.$emmit(event, message);
         this.show = false;
       }
     },

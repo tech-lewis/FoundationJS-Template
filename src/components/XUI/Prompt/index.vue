@@ -48,17 +48,17 @@ export default {
   methods: {
     onConfirm: function () {
       this.show = false;
-      this.$dispatch("confirm");
+      this.$emmit("confirm");
     },
     onCancel: function () {
       this.show = false;
-      this.$dispatch("cancel");
+      this.$emmit("cancel");
     },
   },
   watch: {
     show: function (val) {
       if (val) {
-        this.$dispatch("show");
+        this.$emmit("show");
       }
     },
   },

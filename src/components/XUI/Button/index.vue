@@ -34,7 +34,7 @@ export default {
   methods: {
     click: function () {
       if (!this.disabled) {
-        this.$dispatch("click");
+        this.$emmit("click");
       }
     },
   },

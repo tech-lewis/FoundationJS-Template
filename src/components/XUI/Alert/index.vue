@@ -38,13 +38,13 @@ export default {
   methods: {
     onHide: function () {
       this.show = false;
-      this.$dispatch("hide");
+      this.$emmit("hide");
     },
   },
   watch: {
     show: function (val) {
       if (val) {
-        this.$dispatch("show");
+        this.$emmit("show");
       }
     },
   },

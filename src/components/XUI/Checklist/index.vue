@@ -122,7 +122,7 @@ export default {
   },
   watch: {
     value(newVal) {
-      this.$dispatch("change", this.value);
+      this.$emmit("change", this.value);
     },
   },
 };

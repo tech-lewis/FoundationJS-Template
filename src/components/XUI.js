@@ -1,49 +1,49 @@
-import Radio from './XUI/Radio/index.vue'
-import Group from './XUI/Group/index.vue'
-import DevTip from './XUI/Dev-tip/index.vue'
-import Input from './XUI/Input/index.vue'
-import Number from './XUI/Number/index.vue'
-import Cell from './XUI/Cell/index.vue'
-import Checklist from './XUI/Checklist/index.vue'
-import Date from './XUI/Date/index.vue'
-import Switch from './XUI/Switch/index.vue'
-import Textarea from './XUI/Textarea/index.vue'
-import GroupTitle from './XUI/Group-title/index.vue'
-import Box from './XUI/Box/index.vue'
-import Tip from './XUI/Tip/index.vue'
-import Selector from './XUI/Select/index.vue'
-import XButton from './XUI/Button/index.vue'
-import Flexbox from './XUI/Flexbox/index.vue'
-import FlexboxItem from './XUI/Flexbox-item/index.vue'
-import Tab from './XUI/Tab/index.vue'
-import TabItem from './XUI/Tab-item/index.vue'
-import Swiper from './XUI/Swiper/index.vue'
-import SwiperItem from './XUI/Swiper/Swiper-item/index.vue'
-import Sticky from './XUI/sticky/index.vue'
-import Picker from './XUI/picker/index.vue'
-import Datetime from './XUI/datetime/index.vue'
-import Popup from './XUI/popup/index.vue'
-import Range from './XUI/range/index.vue'
-import Actionsheet from './XUI/Actionsheet/index.vue'
-import Clocker from './XUI/clocker/index.vue'
-import Rater from './XUI/rater/index.vue'
-import PopupPicker from './XUI/Popup-picker/index.vue'
-import Address from './XUI/address/index.vue'
-import Toast from './XUI/toast/index.vue'
-import Loading from './XUI/Loading/index.vue'
-import Alert from './XUI/Alert/index.vue'
-import Confirm from './XUI/Confirm/index.vue'
-import Progress from './XUI/progress/index.vue'
-import XImg from './XUI/X-img/index.vue'
-import Spinner from './XUI/Spinner/index.vue'
-import Calendar from './XUI/calendar/index.vue'
-import Icon from './XUI/Icon/index.vue'
+import Radio from './XUI/MyRadio/index.vue'
+import Group from './XUI/MyGroup/index.vue'
+import Tips from './XUI/MyTips/index.vue'
+import Input from './XUI/MyInput/index.vue'
+import Number from './XUI/MyNumber/index.vue'
+import Cell from './XUI/MyCell/index.vue'
+import Checklist from './XUI/MyChecklist/index.vue'
+import Date from './XUI/MyDate/index.vue'
+import Switch from './XUI/MySwitch/index.vue'
+import Textarea from './XUI/MyTextarea/index.vue'
+import GroupTitle from './XUI/MyGroupTitle/index.vue'
+import Box from './XUI/MyBox/index.vue'
+import Tip from './XUI/MyTip/index.vue'
+import Selector from './XUI/MySelect/index.vue'
+import XButton from './XUI/MyButton/index.vue'
+import Flexbox from './XUI/MyFlexbox/index.vue'
+import FlexboxItem from './XUI/MyFlexboxItem/index.vue'
+import Tab from './XUI/MyTab/index.vue'
+import TabItem from './XUI/MyTab-item/index.vue'
+import Swiper from './XUI/MySwiper/index.vue'
+import SwiperItem from './XUI/MySwiper/Swiper-item/index.vue'
+import Sticky from './XUI/Mysticky/index.vue'
+import Picker from './XUI/Mypicker/index.vue'
+import Datetime from './XUI/Mydatetime/index.vue'
+import Popup from './XUI/Mypopup/index.vue'
+import Range from './XUI/Myrange/index.vue'
+import Actionsheet from './XUI/MyActionsheet/index.vue'
+import Clocker from './XUI/Myclocker/index.vue'
+import Rater from './XUI/Myrater/index.vue'
+import PopupPicker from './XUI/MyPopup-picker/index.vue'
+import Address from './XUI/Myaddress/index.vue'
+import Toast from './XUI/Mytoast/index.vue'
+import Loading from './XUI/MyLoading/index.vue'
+import Alert from './XUI/MyAlert/index.vue'
+import Prompt from './XUI/MyPrompt/index.vue'
+import Progress from './XUI/Myprogress/index.vue'
+import XImg from './XUI/MyX-img/index.vue'
+import Spinner from './XUI/MySpinner/index.vue'
+import Calendar from './XUI/Mycalendar/index.vue'
+import Icon from './XUI/MyIcon/index.vue'
 
 const xui = {
   Radio,
   Group,
   Date,
-  DevTip,
+  Tips,
   Input,
   GroupTitle,
   Number,
@@ -74,7 +74,7 @@ const xui = {
   Toast,
   Loading,
   Alert,
-  Confirm,
+  Prompt,
   Progress,
   XImg,
   Spinner,

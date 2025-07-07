@@ -3,5 +3,8 @@ import App from './App.vue'
 import router from './router/index'
 import 'amfe-flexible'
 import './styles/base.css'
+import focus from './directives/focus';
 
-createApp(App).use(router).mount('#app')
+var app = createApp(App);
+app.directive('focus', focus); // 注册组件
+app.use(router).mount('#app')
