@@ -24,9 +24,13 @@ export default {
   components: {
     InlineDesc,
   },
+  emits: ['update:modelValue'],
   props: {
-    props: ['modelValue'],
-    emits: ['update:modelValue'],
+    // 必须声明
+    modelValue: {
+      type: Boolean,
+      default: false
+    },
     title: {
       type: String,
       required: true,
