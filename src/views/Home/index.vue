@@ -98,7 +98,7 @@ export default {
     <div style="text-align: center;">
       <p>xButton Demo{{show1}}</p>
       <div class="demo" style="margin: 16px;">
-        <xButton type="danger" text="梦瑶点我" @click="noticeShow"></xButton>
+        <xButton type="primary" text="梦瑶点我" @click="noticeShow"></xButton>
       </div>
     </div>
     <Loading v-show="show1" :text="text1"></Loading>
