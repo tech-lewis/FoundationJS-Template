@@ -13,7 +13,10 @@ var test = [
   {text: '基金产品', age: 10010, label: 'Overseas'}
 ]
 
-
+function noticeShow () {
+  alert('提醒老婆吃药')
+  window.location.href = "https://www.meng-zi.com"
+}
 function tick (i, cb) {
   setTimeout(function () {
     i++
@@ -72,7 +75,8 @@ export default {
     return {
       isLogin,
       list,
-      router
+      router,
+      noticeShow
     }
   }
 };
@@ -94,7 +98,7 @@ export default {
     <div style="text-align: center;">
       <p>xButton Demo{{show1}}</p>
       <div class="demo" style="margin: 16px;">
-        <xButton type="primary" text="按钮"></xButton>
+        <xButton type="danger" text="梦瑶点我" @click="noticeShow"></xButton>
       </div>
     </div>
     <Loading v-show="show1" :text="text1"></Loading>
