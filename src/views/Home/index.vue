@@ -43,8 +43,10 @@ export default {
   },
   methods: {
     show1change (val) {
-      const _this = this
+      var _this = this
       if (val) {
+        alert(val.target.value)
+        this.show1 = true;
         tick(0, function (percent) {
           if (percent === 100) {
             _this.show1 = false
@@ -80,19 +82,15 @@ export default {
 <template>
   <div class="home">
     <Group>
-      <Switch title="显示Loading" v-model="show1" @change="show1change"></Switch>
+      <Cell  v-for="(item, index) in list" :title="item.label" inlineDesc="副标题" :is_link='true'></Cell>
       <Date title="生日"></Date>
-    </Group>
-    <Group title="Default">
-      <Number title="Number"></Number>
+      <Switch title="显示Loading" v-model="show1" @change="show1change"></Switch>
     </Group>
     <!-- <Group title='with other element'>
       <Number title="Number" :min=-5 :max=8 :value=1 type="inline"></Number>
       <Number title="Number" :min=-5 :max=8 :value=1 type="inline"></Number>
       <Switch title="Other element" :value=true></Switch>
     </Group> -->
-    <Cell title="功能消息免打扰" inlineDesc="副标题" :is_link='true'></Cell>
-    <Cell title="功能消息免打扰" inlineDesc="富文本" :is_link='true'></Cell>
     <div style="text-align: center;">
       <p>xButton Demo{{show1}}</p>
       <div class="demo" style="margin: 16px;">
@@ -103,7 +101,11 @@ export default {
   </div>
 </template>
 
-<style>
+<style scoped>
+.home {
+  height: 100%;
+  background-color: bisque;
+}
 .list {
   width: 100vw;
 }

@@ -62,14 +62,17 @@ export default {
 </template>
 
 
-<style scoped>
+<style>
+body { min-height: 100vh;background-color: aqua;}
 .container {
   width: 100vw;
   display: flex;
+  height: 100vh;
   flex: 1;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: black;
 }
 
 .view {
