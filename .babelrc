@@ -6,10 +6,16 @@
         "targets": {
           "ie": "8"  // 指定目标浏览器，这里以 IE8 为例
         },
+        "forceAllTransforms": true,
         "useBuiltIns": "usage",  // 按需引入 polyfill
         "corejs": 3  // 使用 core-js@3
       }
     ]
+  ],
+  "plugins": [
+    "transform-remove-strict-mode",
+    ["@babel/plugin-transform-block-scoping", {
+      "throwIfClosureRequired": true
+    }]
   ]
-  // "plugins": ["@babel/plugin-transform-runtime"]
 }

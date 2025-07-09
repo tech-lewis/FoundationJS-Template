@@ -26,9 +26,18 @@ module.exports = (env = {}) => ({
       },
       {
         test: /\.js$/,
-        include: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'node_modules/vue-router')],
+        include: [path.resolve(__dirname, 'src'), /node_modules/], // 关键！
         use: {
-          loader: 'babel-loader'
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['@babel/preset-env', {
+                // 关键配置：强制转换为 ES5 语法
+                forceAllTransforms: true,
+                modules: false
+              }]
+            ]
+          }
         }
       },
       {
