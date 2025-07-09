@@ -1,8 +1,9 @@
-# vue-next-webpack-preview
+# vue 3 Preview
+- WeUI 0.3
+- Webpack 4
+- Vue-Router 4 beta 5
 
 > Minimal webpack setup for Vue 3 (RC)
-
-This is for preview purposes. There might be bugs and undocumented behavior differences from v2, which are expected.
 
 If you are using VSCode, Vetur isn't updated to take advantage of Vue 3's typing yet so intellisense in Vue files may not be fully functional (especially in templates).
 

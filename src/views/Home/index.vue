@@ -5,7 +5,7 @@ import Cell from '@/components/XUI/xCell/index.vue'
 import Group from '@/components/XUI/Group/index.vue'
 import Date from '@/components/XUI/DateCell/index.vue'
 import Loading from '@/components/XUI/MyLoading/index.vue'
-import MyInput from '@/components/XUI/MyInput/index.vue'
+// import MyInput from '@/components/XUI/MyInput/index.vue'
 import xButton from '@/components/XUI/Button/index.vue'
 import Switch from '@/components/XUI/SwitchCell/index.vue'
 import Number from '@/components/XUI/MyNumberInput/index.vue'
@@ -29,7 +29,7 @@ export default {
     Cell,
     Date,
     Group,
-    MyInput,
+    // MyInput,
     xButton,
     Loading,
     Switch,
@@ -114,28 +114,11 @@ export default {
     <Group title="Default">
       <Number title="Number"></Number>
     </Group>
-      
-    <Group title="listen to change events">
-      <Number title="Number" :value=0 :min=0 @change="change"></Number>
-    </Group>
-    <Group title="set width=100">
-      <Number title="Number" :width=100></Number>
-    </Group>
-    <Group title="set step=0.5">
-      <Number title="Number" :step=0.5></Number>
-    </Group>
-
-    <Group title="set value=1, min=-5 and max=8">
-      <Number title="Number" :min=-5 :max=8 :value=1></Number>
-    </Group>
-    <Group title="set value and readonly">
-      <Number :value=10 :readonly=true title="Number"></Number>
-    </Group>
-    <Group title='with other element'>
+    <!-- <Group title='with other element'>
       <Number title="Number" :min=-5 :max=8 :value=1 type="inline"></Number>
       <Number title="Number" :min=-5 :max=8 :value=1 type="inline"></Number>
       <Switch title="Other element" :value=true></Switch>
-    </Group>
+    </Group> -->
     <Cell title="功能消息免打扰" inlineDesc="副标题" :is_link='true'></Cell>
     <Cell title="功能消息免打扰" inlineDesc="富文本" :is_link='true'></Cell>
     <div style="text-align: center;">

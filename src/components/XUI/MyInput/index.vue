@@ -47,23 +47,24 @@
 import Base from "../libs/base"; // 是否公共mixin
 import Icon from "../Icon/index.vue";
 import InlineDesc from "../xCell/Inline-desc.vue";
-import { isEmail, isIP, isURL, isMobilePhone } from "validator";
+import { check } from "validator";
 const validators = {
   email: {
-    fn: isEmail,
+    fn: check().isEmail(),
     msg: "邮箱格式",
   },
   ip: {
-    fn: isIP,
+    fn: check().isIP(),
     msg: "ip地址格式",
   },
   url: {
-    fn: isURL,
+    fn: check().isURL(),
     msg: "URL地址",
   },
   "china-mobile": {
     fn: function (str) {
-      return isMobilePhone(str, "zh-CN");
+      strictRegex = /^(?:(?:13[0-9])|(?:14[5-9])|(?:15[0-9])|(?:16[2567])|(?:17[0-8])|(?:18[0-9])|(?:19[0-9]))\d{8}$/;
+      return strictRegex.test(str);
     },
     msg: "手机号码",
   },
@@ -75,7 +76,7 @@ const validators = {
   },
 };
 export default {
-  ready() {
+  created () {
     if (!this.title && !this.placeholder) {
       console.warn("no title and no placeholder?");
     }

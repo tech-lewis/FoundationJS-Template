@@ -5294,6 +5294,11 @@ v8-compile-cache@^2.1.1:
   resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-2.1.1.tgz#54bc3cdd43317bca91e35dcaf305b1a7237de745"
   integrity sha512-8OQ9CL+VWyt3JStj7HX7/ciTL2V3Rl1Wf5OL+SNTm0yK1KvtReVulksyeRnCANHHuUxHlQig+JJDlUhBt1NQDQ==
 
+validator@0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-0.1.0.tgz#27c3e1b1c16a4b8453261fbc43efa590b2b95046"
+  integrity sha512-KNw7FgzeDhbnoY7ZIRxxIRyWrGgmUsrk5LowDAmngZzMSa8d0IpoQgZh9Qipb54wu9pZJOdmYW4J6jf0HPFR/Q==
+
 vant@3.0.0-alpha.3:
   version "3.0.0-alpha.3"
   resolved "https://registry.yarnpkg.com/vant/-/vant-3.0.0-alpha.3.tgz#1fa78cb8e63adb9bcd3bc2436b75d8d534fd6020"
